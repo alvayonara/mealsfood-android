@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.alvayonara.mealsfood.ui.dashboard.DashboardFragment"
+        android:name="com.alvayonara.mealsfood.dashboard.DashboardFragment"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.alvayonara.mealsfood.ui.favorite.FavoriteFragment"
+        android:name="com.alvayonara.mealsfood.favorite.FavoriteFragment"
         tools:layout="@layout/fragment_dashboard" />
 
 </navigation>

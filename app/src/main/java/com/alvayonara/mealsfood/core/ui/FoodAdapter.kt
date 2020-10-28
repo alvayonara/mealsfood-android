@@ -1,4 +1,4 @@
-package com.alvayonara.mealsfood.ui.dashboard
+package com.alvayonara.mealsfood.core.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.alvayonara.mealsfood.FoodEntity
 import com.alvayonara.mealsfood.R
-import com.alvayonara.mealsfood.ui.detail.DetailFoodFragment
+import com.alvayonara.mealsfood.detail.DetailFoodFragment
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_row_food.view.*
 

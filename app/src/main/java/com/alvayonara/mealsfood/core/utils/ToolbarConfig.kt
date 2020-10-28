@@ -1,4 +1,4 @@
-package com.alvayonara.mealsfood.utils
+package com.alvayonara.mealsfood.core.utils
 
 import android.app.Activity
 import android.graphics.Color

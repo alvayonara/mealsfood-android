@@ -1,4 +1,4 @@
-package com.alvayonara.mealsfood.ui.search
+package com.alvayonara.mealsfood.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
