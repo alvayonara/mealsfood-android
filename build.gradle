@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.4.0"
+    ext.kotlin_version = '1.4.10'
     repositories {
         google()
         jcenter()
@@ -18,9 +18,22 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        maven { url 'https://jitpack.io' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    materialVersion = '1.2.1'
+    recyclerViewVersion = '1.1.0'
+    glideVersion = '4.11.0'
+    archLifecycleVersion = '2.2.0'
+    retrofitVersion = '2.9.0'
+    retrofitGsonVersion = '2.9.0'
+    anko_version = '0.10.8'
+    ripple_version = '1.0.2'
 }
