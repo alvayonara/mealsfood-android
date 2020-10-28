@@ -55,22 +55,11 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    //architecture component
+    // Architecture Component
     implementation "androidx.lifecycle:lifecycle-viewmodel:$archLifecycleVersion"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    //retrofit
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitGsonVersion"
-
-    //anko
-    implementation "org.jetbrains.anko:anko:$anko_version"
-
-    //ripple
-    implementation "com.balysv:material-ripple:$ripple_version"
-
-    //carousel
-    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.1.0'
-    // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
-    implementation 'me.relex:circleindicator:2.1.4'
 }

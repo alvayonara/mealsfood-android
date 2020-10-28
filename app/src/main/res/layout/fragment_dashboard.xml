@@ -71,223 +71,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spacing_mlarge" />
 
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:orientation="vertical">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <!--                    <TextView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/spacing_large"-->
-                <!--                        android:layout_marginRight="@dimen/spacing_large"-->
-                <!--                        android:text="Best Offers"-->
-                <!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-                <!--                        android:textColor="@color/grey_80"-->
-                <!--                        android:textStyle="bold" />-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:orientation="horizontal">
 
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/spacing_large"-->
-                <!--                        android:layout_marginRight="@dimen/spacing_large"-->
-                <!--                        android:orientation="horizontal">-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Seafood"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold" />
 
-                <!--                        <TextView-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:text="Recommended Destination"-->
-                <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-                <!--                            android:textColor="@color/grey_40" />-->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
-                <!--                        <View-->
-                <!--                            android:layout_width="0dp"-->
-                <!--                            android:layout_height="0dp"-->
-                <!--                            android:layout_weight="1" />-->
+                    </LinearLayout>
 
-                <!--                        <TextView-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:text="View All"-->
-                <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-                <!--                            android:textColor="@color/grey_40" />-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_foods"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_row_food" />
 
-                <!--                    </LinearLayout>-->
-
-                <!--                    <HorizontalScrollView-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginTop="@dimen/spacing_middle"-->
-                <!--                        android:scrollbars="none">-->
-
-                <!--                        <LinearLayout-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:gravity="center_vertical"-->
-                <!--                            android:orientation="horizontal">-->
-
-                <!--                            <View-->
-                <!--                                android:layout_width="@dimen/spacing_large"-->
-                <!--                                android:layout_height="0dp" />-->
-
-                <!--                            <LinearLayout-->
-                <!--                                android:layout_width="wrap_content"-->
-                <!--                                android:layout_height="wrap_content"-->
-                <!--                                android:background="?attr/selectableItemBackground"-->
-                <!--                                android:clickable="true"-->
-                <!--                                android:orientation="vertical">-->
-
-                <!--                                <androidx.cardview.widget.CardView-->
-                <!--                                    android:layout_width="180dp"-->
-                <!--                                    android:layout_height="120dp"-->
-                <!--                                    android:layout_margin="1dp"-->
-                <!--                                    app:cardCornerRadius="6dp"-->
-                <!--                                    app:cardElevation="1dp"-->
-                <!--                                    app:cardPreventCornerOverlap="false"-->
-                <!--                                    app:cardUseCompatPadding="false">-->
-
-                <!--                                    <ImageView-->
-                <!--                                        android:layout_width="match_parent"-->
-                <!--                                        android:layout_height="match_parent"-->
-                <!--                                        android:scaleType="centerCrop"-->
-                <!--                                        android:src="@drawable/image_16" />-->
-
-                <!--                                </androidx.cardview.widget.CardView>-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_medium"-->
-                <!--                                    android:text="France"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--                                    android:textColor="@color/grey_80"-->
-                <!--                                    app:fontFamily="sans-serif-medium" />-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_small"-->
-                <!--                                    android:text="Paris"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
-                <!--                                    android:textColor="@color/grey_40" />-->
-
-                <!--                            </LinearLayout>-->
-
-                <!--                            <View-->
-                <!--                                android:layout_width="@dimen/spacing_middle"-->
-                <!--                                android:layout_height="0dp" />-->
-
-                <!--                            <LinearLayout-->
-                <!--                                android:layout_width="wrap_content"-->
-                <!--                                android:layout_height="wrap_content"-->
-                <!--                                android:background="?attr/selectableItemBackground"-->
-                <!--                                android:clickable="true"-->
-                <!--                                android:orientation="vertical">-->
-
-                <!--                                <androidx.cardview.widget.CardView-->
-                <!--                                    android:layout_width="180dp"-->
-                <!--                                    android:layout_height="120dp"-->
-                <!--                                    android:layout_margin="1dp"-->
-                <!--                                    app:cardCornerRadius="6dp"-->
-                <!--                                    app:cardElevation="1dp"-->
-                <!--                                    app:cardPreventCornerOverlap="false"-->
-                <!--                                    app:cardUseCompatPadding="false">-->
-
-                <!--                                    <ImageView-->
-                <!--                                        android:layout_width="match_parent"-->
-                <!--                                        android:layout_height="match_parent"-->
-                <!--                                        android:scaleType="centerCrop"-->
-                <!--                                        android:src="@drawable/image_15" />-->
-
-                <!--                                </androidx.cardview.widget.CardView>-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_medium"-->
-                <!--                                    android:text="Thailand"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--                                    android:textColor="@color/grey_80"-->
-                <!--                                    app:fontFamily="sans-serif-medium" />-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_small"-->
-                <!--                                    android:text="Bangkok"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
-                <!--                                    android:textColor="@color/grey_40" />-->
-
-                <!--                            </LinearLayout>-->
-
-                <!--                            <View-->
-                <!--                                android:layout_width="@dimen/spacing_middle"-->
-                <!--                                android:layout_height="0dp" />-->
-
-                <!--                            <LinearLayout-->
-                <!--                                android:layout_width="wrap_content"-->
-                <!--                                android:layout_height="wrap_content"-->
-                <!--                                android:background="?attr/selectableItemBackground"-->
-                <!--                                android:clickable="true"-->
-                <!--                                android:orientation="vertical">-->
-
-                <!--                                <androidx.cardview.widget.CardView-->
-                <!--                                    android:layout_width="180dp"-->
-                <!--                                    android:layout_height="120dp"-->
-                <!--                                    android:layout_margin="1dp"-->
-                <!--                                    app:cardCornerRadius="6dp"-->
-                <!--                                    app:cardElevation="1dp"-->
-                <!--                                    app:cardPreventCornerOverlap="false"-->
-                <!--                                    app:cardUseCompatPadding="false">-->
-
-                <!--                                    <ImageView-->
-                <!--                                        android:layout_width="match_parent"-->
-                <!--                                        android:layout_height="match_parent"-->
-                <!--                                        android:scaleType="centerCrop"-->
-                <!--                                        android:src="@drawable/image_17" />-->
-
-                <!--                                </androidx.cardview.widget.CardView>-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_medium"-->
-                <!--                                    android:text="Australia"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--                                    android:textColor="@color/grey_80"-->
-                <!--                                    app:fontFamily="sans-serif-medium" />-->
-
-                <!--                                <TextView-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginLeft="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginRight="@dimen/spacing_xsmall"-->
-                <!--                                    android:layout_marginTop="@dimen/spacing_small"-->
-                <!--                                    android:text="Melbourne"-->
-                <!--                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
-                <!--                                    android:textColor="@color/grey_40" />-->
-
-                <!--                            </LinearLayout>-->
-
-                <!--                            <View-->
-                <!--                                android:layout_width="@dimen/spacing_large"-->
-                <!--                                android:layout_height="0dp" />-->
-
-                <!--                        </LinearLayout>-->
-
-                <!--                    </HorizontalScrollView>-->
-
-                <!--                </LinearLayout>-->
+                </LinearLayout>
 
                 <View
                     android:layout_width="0dp"
@@ -296,6 +116,20 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress_bar_dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/green_300"
+                android:indeterminateTintMode="src_atop" />
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
