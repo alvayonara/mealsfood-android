@@ -3,9 +3,6 @@ package com.alvayonara.mealsfood
 import com.google.gson.annotations.SerializedName
 
 data class FoodEntity(
-    @SerializedName("meals")
-    val foods: List<FoodEntity>? = null,
-
     @SerializedName("idMeal")
     var foodId: String? = null,
 
