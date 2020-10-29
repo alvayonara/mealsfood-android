@@ -112,7 +112,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:tint="@color/grey_60"
+                    android:tint="@color/green_300"
                     app:srcCompat="@drawable/ic_favorite_border" />
 
             </LinearLayout>

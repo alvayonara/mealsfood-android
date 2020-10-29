@@ -2,8 +2,10 @@ package com.alvayonara.mealsfood.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
@@ -13,8 +15,8 @@ import com.alvayonara.mealsfood.core.utils.ToolbarConfig
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_detail_food.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_detail_food.*
 
 class DetailFoodActivity : AppCompatActivity() {
 
@@ -86,6 +88,34 @@ class DetailFoodActivity : AppCompatActivity() {
             tv_tags.text = it[0].tags
             tv_food_instructions.text = it[0].instructions
             tv_youtube.text = it[0].youtube
+
+            Log.v("ASW", it[0].isFavorite.toString())
+
+            var statusFavorite = it[0].isFavorite
+            setStatusFavorite(statusFavorite)
+            iv_food_favorite.setOnClickListener {
+                statusFavorite = !statusFavorite
+                detailFoodViewModel.setFavoriteFood(food[0], statusFavorite)
+                setStatusFavorite(statusFavorite)
+            }
+        }
+    }
+
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if (statusFavorite) {
+            iv_food_favorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_favorite
+                )
+            )
+        } else {
+            iv_food_favorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_favorite_border
+                )
+            )
         }
     }
 

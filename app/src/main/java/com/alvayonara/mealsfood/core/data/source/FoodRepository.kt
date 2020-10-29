@@ -67,7 +67,7 @@ class FoodRepository private constructor(
 
             override fun saveCallResult(data: List<FoodResponse>) {
                 val foodList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.updateFood(foodList[0])
+                localDataSource.insertFood(foodList)
             }
         }.asLiveData()
 
