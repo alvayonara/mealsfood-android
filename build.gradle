@@ -32,4 +32,6 @@ ext {
     archLifecycleVersion = '2.2.0'
     retrofitVersion = '2.9.0'
     retrofitGsonVersion = '2.9.0'
+    loggingInterceptorVersion = '4.8.0'
+    roomVersion = '2.2.5'
 }
