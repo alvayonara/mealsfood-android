@@ -1,5 +1,7 @@
 package com.alvayonara.mealsfood.core.data.source.remote
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
@@ -8,6 +10,11 @@ import com.alvayonara.mealsfood.core.data.source.remote.response.DetailResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.ListDetailResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.ListFoodResponse
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,50 +30,46 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
     }
 
-    fun getListFood(): LiveData<ApiResponse<List<FoodResponse>>> {
-        val resultData = MutableLiveData<ApiResponse<List<FoodResponse>>>()
+    @SuppressLint("CheckResult")
+    fun getListFood(): Flowable<ApiResponse<List<FoodResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<FoodResponse>>>()
 
         // Get data from remote API
         val client = apiService.getListFood()
 
-        client.enqueue(object : Callback<ListFoodResponse> {
-            override fun onResponse(
-                call: Call<ListFoodResponse>,
-                response: Response<ListFoodResponse>
-            ) {
-                val dataArray = response.body()?.foods
-                resultData.value =
-                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
-            }
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                val dataArray = response.foods!!
+                resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+            }, { error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+            })
 
-            override fun onFailure(call: Call<ListFoodResponse>, t: Throwable) {
-                resultData.value = ApiResponse.Error(t.message.toString())
-            }
-        })
-
-        return resultData
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun getFoodDetailById(foodId: String): LiveData<List<DetailResponse>> {
-        val resultData = MutableLiveData<List<DetailResponse>>()
+    @SuppressLint("CheckResult")
+    fun getFoodDetailById(foodId: String): Flowable<List<DetailResponse>> {
+        val resultData = PublishSubject.create<List<DetailResponse>>()
 
         val client = apiService.getFoodDetailById(foodId)
 
-        client.enqueue(object : Callback<ListDetailResponse> {
-            override fun onResponse(
-                call: Call<ListDetailResponse>,
-                response: Response<ListDetailResponse>
-            ) {
-                val dataArray = response.body()?.foods
-                resultData.value = dataArray
-            }
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                val dataArray = response.foods!!
+                resultData.onNext(dataArray)
+            }, { error ->
+                resultData.onNext(emptyList())
+                Log.e("Error getFoodDetailById", error.toString())
+            })
 
-            override fun onFailure(call: Call<ListDetailResponse>, t: Throwable) {
-                resultData.value = null
-            }
-        })
-
-        return resultData
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 }
 

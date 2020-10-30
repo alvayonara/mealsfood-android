@@ -1,9 +1,6 @@
 package com.alvayonara.mealsfood.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
@@ -18,7 +15,7 @@ class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
 
     var foodDetail: LiveData<List<Detail>> =
         Transformations.switchMap(foodId) {
-            foodUseCase.getFoodDetailById(it)
+            LiveDataReactiveStreams.fromPublisher(foodUseCase.getFoodDetailById(it))
         }
 
     fun setFavoriteFood(food: Food, newStatus: Boolean) =

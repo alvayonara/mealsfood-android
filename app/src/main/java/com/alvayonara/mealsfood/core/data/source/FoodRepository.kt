@@ -11,6 +11,9 @@ import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import com.alvayonara.mealsfood.core.utils.AppExecutors
 import com.alvayonara.mealsfood.core.utils.DataMapper
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class FoodRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -32,55 +35,34 @@ class FoodRepository private constructor(
             }
     }
 
-    override fun getListFood(): LiveData<Resource<List<Food>>> =
-        object : NetworkBoundResource<List<Food>, List<FoodResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Food>> {
-                return Transformations.map(localDataSource.getListFood()) {
-                    DataMapper.mapFoodEntitiesToDomain(it)
-                }
+    override fun getListFood(): Flowable<Resource<List<Food>>> =
+        object : NetworkBoundResource<List<Food>, List<FoodResponse>>() {
+            override fun loadFromDB(): Flowable<List<Food>> = localDataSource.getListFood().map {
+                DataMapper.mapFoodEntitiesToDomain(it)
             }
 
             override fun shouldFetch(data: List<Food>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<FoodResponse>>> =
+            override fun createCall(): Flowable<ApiResponse<List<FoodResponse>>> =
                 remoteDataSource.getListFood()
 
             override fun saveCallResult(data: List<FoodResponse>) {
                 val foodList = DataMapper.mapFoodResponsesToEntities(data)
                 localDataSource.insertFood(foodList)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
             }
-        }.asLiveData()
+        }.asFlowable()
 
-    override fun getFoodDetailById(foodId: String): LiveData<List<Detail>> =
-        Transformations.map(remoteDataSource.getFoodDetailById(foodId)) {
+    override fun getFoodDetailById(foodId: String): Flowable<List<Detail>> =
+        remoteDataSource.getFoodDetailById(foodId).map {
             DataMapper.mapDetailResponsesToDomain(it)
         }
 
-//    override fun getFoodDetailById(foodId: String): LiveData<Resource<List<Food>>> =
-//        object : NetworkBoundResource<List<Food>, List<FoodResponse>>(appExecutors) {
-//            override fun loadFromDB(): LiveData<List<Food>> {
-//                return Transformations.map(localDataSource.getFoodDetailById(foodId)) {
-//                    DataMapper.mapEntitiesToDomain(it)
-//                }
-//            }
-//
-//            override fun shouldFetch(data: List<Food>?): Boolean =
-//                true
-//
-//            override fun createCall(): LiveData<ApiResponse<List<FoodResponse>>> =
-//                remoteDataSource.getFoodDetailById(foodId)
-//
-//            override fun saveCallResult(data: List<FoodResponse>) {
-//                val foodList = DataMapper.mapResponsesToEntities(data)
-//                localDataSource.updateFood(foodList[0])
-//            }
-//        }.asLiveData()
-
-    override fun getFavoriteFood(): LiveData<List<Food>> {
-        return Transformations.map(localDataSource.getFavoriteFood()) {
-            DataMapper.mapFoodEntitiesToDomain(it)
-        }
+    override fun getFavoriteFood(): Flowable<List<Food>> = localDataSource.getFavoriteFood().map {
+        DataMapper.mapFoodEntitiesToDomain(it)
     }
 
     override fun setFavoriteFood(food: Food, state: Boolean) {

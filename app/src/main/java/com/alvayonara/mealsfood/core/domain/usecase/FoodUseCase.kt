@@ -5,14 +5,15 @@ import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
+import io.reactivex.Flowable
 
 interface FoodUseCase {
 
-    fun getListFood(): LiveData<Resource<List<Food>>>
+    fun getListFood(): Flowable<Resource<List<Food>>>
 
-    fun getFoodDetailById(foodId: String): LiveData<List<Detail>>
+    fun getFoodDetailById(foodId: String): Flowable<List<Detail>>
 
-    fun getFavoriteFood(): LiveData<List<Food>>
+    fun getFavoriteFood(): Flowable<List<Food>>
 
     fun setFavoriteFood(food: Food, state: Boolean)
 }

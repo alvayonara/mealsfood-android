@@ -3,6 +3,7 @@ package com.alvayonara.mealsfood.core.data.source.local
 import com.alvayonara.mealsfood.core.data.source.local.room.FoodDao
 import androidx.lifecycle.LiveData
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodEntity
+import io.reactivex.Flowable
 
 class LocalDataSource private constructor(private val foodDao: FoodDao) {
 
@@ -15,16 +16,11 @@ class LocalDataSource private constructor(private val foodDao: FoodDao) {
             }
     }
 
-    fun getListFood(): LiveData<List<FoodEntity>> = foodDao.getListFood()
+    fun getListFood(): Flowable<List<FoodEntity>> = foodDao.getListFood()
 
-//    fun getFoodDetailById(foodId: String): LiveData<List<FoodEntity>> =
-//        foodDao.getFoodDetailById(foodId)
-
-    fun getFavoriteFood(): LiveData<List<FoodEntity>> = foodDao.getFavoriteFood()
+    fun getFavoriteFood(): Flowable<List<FoodEntity>> = foodDao.getFavoriteFood()
 
     fun insertFood(foodList: List<FoodEntity>) = foodDao.insertFood(foodList)
-
-    fun updateFood(food: FoodEntity) = foodDao.updateFood(food)
 
     fun setFavoriteFood(food: FoodEntity, newState: Boolean) {
         food.isFavorite = newState

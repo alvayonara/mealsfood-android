@@ -2,6 +2,7 @@ package com.alvayonara.mealsfood.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -73,6 +74,8 @@ class DetailFoodActivity : AppCompatActivity() {
                 .into(iv_food_detail)
 
             tv_food_name_detail.text = it.name
+
+            Log.v("ASW", it.isFavorite.toString())
 
             var statusFavorite = it.isFavorite
             setStatusFavorite(statusFavorite)
