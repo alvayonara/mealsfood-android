@@ -14,26 +14,15 @@ import com.alvayonara.mealsfood.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FoodRepository private constructor(
+@Singleton
+class FoodRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IFoodRepository {
-
-    companion object {
-        @Volatile
-        private var instance: FoodRepository? = null
-
-        fun getInstance(
-            remoteData: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): FoodRepository =
-            instance ?: synchronized(this) {
-                instance ?: FoodRepository(remoteData, localData, appExecutors)
-            }
-    }
 
     override fun getListFood(): Flowable<Resource<List<Food>>> =
         object : NetworkBoundResource<List<Food>, List<FoodResponse>>() {

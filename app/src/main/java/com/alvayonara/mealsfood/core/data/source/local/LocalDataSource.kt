@@ -4,17 +4,11 @@ import com.alvayonara.mealsfood.core.data.source.local.room.FoodDao
 import androidx.lifecycle.LiveData
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodEntity
 import io.reactivex.Flowable
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource private constructor(private val foodDao: FoodDao) {
-
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(foodDao: FoodDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(foodDao)
-            }
-    }
+@Singleton
+class LocalDataSource @Inject constructor(private val foodDao: FoodDao) {
 
     fun getListFood(): Flowable<List<FoodEntity>> = foodDao.getListFood()
 

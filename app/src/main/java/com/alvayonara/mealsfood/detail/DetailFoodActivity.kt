@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.alvayonara.mealsfood.MyApplication
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
@@ -15,26 +17,28 @@ import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail_food.*
+import javax.inject.Inject
 
 class DetailFoodActivity : AppCompatActivity() {
 
-    private lateinit var detailFoodViewModel: DetailFoodViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val detailFoodViewModel: DetailFoodViewModel by viewModels {
+        factory
+    }
 
     companion object {
         const val EXTRA_FOOD_DATA = "extra_food_data"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_food)
 
         initToolbar()
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailFoodViewModel = ViewModelProvider(
-            this,
-            factory
-        )[DetailFoodViewModel::class.java]
 
         initView()
     }

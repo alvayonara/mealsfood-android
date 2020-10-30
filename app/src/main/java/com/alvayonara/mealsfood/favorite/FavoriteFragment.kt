@@ -1,5 +1,6 @@
 package com.alvayonara.mealsfood.favorite
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alvayonara.mealsfood.MyApplication
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
@@ -19,10 +22,22 @@ import com.alvayonara.mealsfood.dashboard.DashboardViewModel
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val favoriteViewModel: FavoriteViewModel by viewModels {
+        factory
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        ((requireActivity().application as MyApplication).appComponent.inject(this))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +48,6 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
-
             val foodAdapter = FoodAdapter(FoodAdapter.TYPE_FAVORITE).apply {
                 onItemClick = {
                     val intent = Intent(requireActivity(), DetailFoodActivity::class.java).putExtra(
