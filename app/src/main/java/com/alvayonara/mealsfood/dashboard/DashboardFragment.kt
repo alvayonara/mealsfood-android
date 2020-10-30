@@ -13,6 +13,7 @@ import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.ViewModelFactory
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
+import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_DASHBOARD
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
@@ -37,7 +38,7 @@ class DashboardFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             dashboardViewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
 
-            val foodAdapter = FoodAdapter().apply {
+            val foodAdapter = FoodAdapter(TYPE_DASHBOARD).apply {
                 onItemClick = {
                     val intent = Intent(requireActivity(), DetailFoodActivity::class.java).putExtra(
                         EXTRA_FOOD_DATA, it
@@ -64,6 +65,7 @@ class DashboardFragment : Fragment() {
 
             with(rv_foods) {
                 layoutManager = GridLayoutManager(context, 2)
+                setHasFixedSize(true)
                 adapter = foodAdapter
             }
 

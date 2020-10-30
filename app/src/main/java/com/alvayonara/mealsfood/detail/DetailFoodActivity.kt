@@ -2,7 +2,6 @@ package com.alvayonara.mealsfood.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -60,9 +59,10 @@ class DetailFoodActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = ""
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        with(supportActionBar) {
+            title = ""
+            this?.setDisplayHomeAsUpEnabled(true)
+        }
         ToolbarConfig.setDefaultStatusBarColor(this)
     }
 
@@ -74,11 +74,9 @@ class DetailFoodActivity : AppCompatActivity() {
 
             tv_food_name_detail.text = it.name
 
-            Log.v("ASW", it.isFavorite.toString())
-
             var statusFavorite = it.isFavorite
             setStatusFavorite(statusFavorite)
-            iv_food_favorite.setOnClickListener {
+            iv_food_favorite_button.setOnClickListener {
                 statusFavorite = !statusFavorite
                 detailFoodViewModel.setFavoriteFood(food, statusFavorite)
                 setStatusFavorite(statusFavorite)
@@ -98,14 +96,14 @@ class DetailFoodActivity : AppCompatActivity() {
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            iv_food_favorite.setImageDrawable(
+            iv_food_favorite_button.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_favorite
                 )
             )
         } else {
-            iv_food_favorite.setImageDrawable(
+            iv_food_favorite_button.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_favorite_border

@@ -106,7 +106,7 @@
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/iv_food_favorite"
+                    android:id="@+id/iv_food_favorite_button"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
