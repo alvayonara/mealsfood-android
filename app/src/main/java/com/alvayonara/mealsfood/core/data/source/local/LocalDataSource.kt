@@ -17,8 +17,8 @@ class LocalDataSource private constructor(private val foodDao: FoodDao) {
 
     fun getListFood(): LiveData<List<FoodEntity>> = foodDao.getListFood()
 
-    fun getFoodDetailById(foodId: String): LiveData<List<FoodEntity>> =
-        foodDao.getFoodDetailById(foodId)
+//    fun getFoodDetailById(foodId: String): LiveData<List<FoodEntity>> =
+//        foodDao.getFoodDetailById(foodId)
 
     fun getFavoriteFood(): LiveData<List<FoodEntity>> = foodDao.getFavoriteFood()
 

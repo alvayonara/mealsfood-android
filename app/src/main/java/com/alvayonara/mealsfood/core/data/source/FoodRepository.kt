@@ -6,6 +6,7 @@ import com.alvayonara.mealsfood.core.data.source.local.LocalDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodResponse
+import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import com.alvayonara.mealsfood.core.utils.AppExecutors
@@ -35,7 +36,7 @@ class FoodRepository private constructor(
         object : NetworkBoundResource<List<Food>, List<FoodResponse>>(appExecutors) {
             override fun loadFromDB(): LiveData<List<Food>> {
                 return Transformations.map(localDataSource.getListFood()) {
-                    DataMapper.mapEntitiesToDomain(it)
+                    DataMapper.mapFoodEntitiesToDomain(it)
                 }
             }
 
@@ -46,39 +47,44 @@ class FoodRepository private constructor(
                 remoteDataSource.getListFood()
 
             override fun saveCallResult(data: List<FoodResponse>) {
-                val foodList = DataMapper.mapResponsesToEntities(data)
+                val foodList = DataMapper.mapFoodResponsesToEntities(data)
                 localDataSource.insertFood(foodList)
             }
         }.asLiveData()
 
-    override fun getFoodDetailById(foodId: String): LiveData<Resource<List<Food>>> =
-        object : NetworkBoundResource<List<Food>, List<FoodResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Food>> {
-                return Transformations.map(localDataSource.getFoodDetailById(foodId)) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
-            }
+    override fun getFoodDetailById(foodId: String): LiveData<List<Detail>> =
+        Transformations.map(remoteDataSource.getFoodDetailById(foodId)) {
+            DataMapper.mapDetailResponsesToDomain(it)
+        }
 
-            override fun shouldFetch(data: List<Food>?): Boolean =
-                true
-
-            override fun createCall(): LiveData<ApiResponse<List<FoodResponse>>> =
-                remoteDataSource.getFoodDetailById(foodId)
-
-            override fun saveCallResult(data: List<FoodResponse>) {
-                val foodList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.insertFood(foodList)
-            }
-        }.asLiveData()
+//    override fun getFoodDetailById(foodId: String): LiveData<Resource<List<Food>>> =
+//        object : NetworkBoundResource<List<Food>, List<FoodResponse>>(appExecutors) {
+//            override fun loadFromDB(): LiveData<List<Food>> {
+//                return Transformations.map(localDataSource.getFoodDetailById(foodId)) {
+//                    DataMapper.mapEntitiesToDomain(it)
+//                }
+//            }
+//
+//            override fun shouldFetch(data: List<Food>?): Boolean =
+//                true
+//
+//            override fun createCall(): LiveData<ApiResponse<List<FoodResponse>>> =
+//                remoteDataSource.getFoodDetailById(foodId)
+//
+//            override fun saveCallResult(data: List<FoodResponse>) {
+//                val foodList = DataMapper.mapResponsesToEntities(data)
+//                localDataSource.updateFood(foodList[0])
+//            }
+//        }.asLiveData()
 
     override fun getFavoriteFood(): LiveData<List<Food>> {
         return Transformations.map(localDataSource.getFavoriteFood()) {
-            DataMapper.mapEntitiesToDomain(it)
+            DataMapper.mapFoodEntitiesToDomain(it)
         }
     }
 
     override fun setFavoriteFood(food: Food, state: Boolean) {
-        val foodEntity = DataMapper.mapDomainToEntity(food)
+        val foodEntity = DataMapper.mapFoodDomainToEntity(food)
         appExecutors.diskIO().execute { localDataSource.setFavoriteFood(foodEntity, state) }
     }
 }

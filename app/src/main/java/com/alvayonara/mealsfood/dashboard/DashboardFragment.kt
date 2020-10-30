@@ -1,5 +1,6 @@
 package com.alvayonara.mealsfood.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import com.alvayonara.mealsfood.core.ui.ViewModelFactory
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
+import com.alvayonara.mealsfood.detail.DetailFoodActivity
+import com.alvayonara.mealsfood.detail.DetailFoodActivity.Companion.EXTRA_FOOD_DATA
 import com.alvayonara.mealsfood.search.SearchFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
@@ -34,7 +37,14 @@ class DashboardFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             dashboardViewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
 
-            val foodAdapter = FoodAdapter()
+            val foodAdapter = FoodAdapter().apply {
+                onItemClick = {
+                    val intent = Intent(requireActivity(), DetailFoodActivity::class.java).putExtra(
+                        EXTRA_FOOD_DATA, it
+                    )
+                    startActivity(intent)
+                }
+            }
 
             dashboardViewModel.food.observe(viewLifecycleOwner, {
                 if (it != null) {

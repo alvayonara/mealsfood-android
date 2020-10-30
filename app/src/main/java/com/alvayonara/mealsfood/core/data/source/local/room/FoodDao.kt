@@ -10,9 +10,9 @@ interface FoodDao {
     @Query("SELECT * FROM food")
     fun getListFood(): LiveData<List<FoodEntity>>
 
-    @Transaction
-    @Query("SELECT * FROM food WHERE id = :foodId")
-    fun getFoodDetailById(foodId: String): LiveData<List<FoodEntity>>
+//    @Transaction
+//    @Query("SELECT * FROM food WHERE id = :foodId")
+//    fun getFoodDetailById(foodId: String): LiveData<List<FoodEntity>>
 
     @Query("SELECT * FROM food where isFavorite = 1")
     fun getFavoriteFood(): LiveData<List<FoodEntity>>

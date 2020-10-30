@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.alvayonara.mealsfood.core.data.source.Resource
+import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
+import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
+import com.alvayonara.mealsfood.core.data.source.remote.response.FoodResponse
+import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
 
@@ -16,7 +19,7 @@ class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
         this.foodId.value = foodId
     }
 
-    var foodDetail: LiveData<Resource<List<Food>>> =
+    var foodDetail: LiveData<List<Detail>> =
         Transformations.switchMap(foodId) {
             foodUseCase.getFoodDetailById(it)
         }

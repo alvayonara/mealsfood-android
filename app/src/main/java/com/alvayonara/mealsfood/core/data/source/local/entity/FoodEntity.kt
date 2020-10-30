@@ -12,29 +12,14 @@ import kotlinx.android.parcel.Parcelize
 data class FoodEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "id")
-    var id: String,
+    @ColumnInfo(name = "foodId")
+    var foodId: String,
 
     @ColumnInfo(name = "name")
     var name: String,
 
     @ColumnInfo(name = "thumb")
     var thumb: String,
-
-    @ColumnInfo(name = "category")
-    var category: String,
-
-    @ColumnInfo(name = "area")
-    var area: String,
-
-    @ColumnInfo(name = "tags")
-    var tags: String,
-
-    @ColumnInfo(name = "instructions")
-    var instructions: String,
-
-    @ColumnInfo(name = "youtube")
-    var youtube: String,
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
