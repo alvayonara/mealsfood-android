@@ -1,43 +1,25 @@
 package com.alvayonara.mealsfood.favorite
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alvayonara.mealsfood.MyApplication
 import com.alvayonara.mealsfood.R
-import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
-import com.alvayonara.mealsfood.core.ui.ViewModelFactory
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
-import com.alvayonara.mealsfood.dashboard.DashboardViewModel
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
-import kotlinx.android.synthetic.main.fragment_dashboard.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favorite.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val favoriteViewModel: FavoriteViewModel by viewModels {
-        factory
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        ((requireActivity().application as MyApplication).appComponent.inject(this))
-    }
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

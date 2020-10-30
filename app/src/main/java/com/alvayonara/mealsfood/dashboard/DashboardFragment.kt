@@ -1,6 +1,5 @@
 package com.alvayonara.mealsfood.dashboard
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.alvayonara.mealsfood.MyApplication
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
-import com.alvayonara.mealsfood.core.ui.ViewModelFactory
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_DASHBOARD
 import com.alvayonara.mealsfood.core.utils.gone
@@ -22,23 +18,13 @@ import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import com.alvayonara.mealsfood.detail.DetailFoodActivity.Companion.EXTRA_FOOD_DATA
 import com.alvayonara.mealsfood.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val dashboardViewModel: DashboardViewModel by viewModels {
-        factory
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        ((requireActivity()).application as MyApplication).appComponent.inject(this)
-    }
+    private val dashboardViewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

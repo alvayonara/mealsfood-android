@@ -6,35 +6,26 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
-import com.alvayonara.mealsfood.MyApplication
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
-import com.alvayonara.mealsfood.core.ui.ViewModelFactory
 import com.alvayonara.mealsfood.core.utils.ToolbarConfig
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail_food.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailFoodActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val detailFoodViewModel: DetailFoodViewModel by viewModels {
-        factory
-    }
+    private val detailFoodViewModel: DetailFoodViewModel by viewModels()
 
     companion object {
         const val EXTRA_FOOD_DATA = "extra_food_data"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_food)
 
