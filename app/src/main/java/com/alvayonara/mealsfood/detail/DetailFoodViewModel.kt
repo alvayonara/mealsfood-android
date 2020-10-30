@@ -4,8 +4,9 @@ import androidx.lifecycle.*
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
+import javax.inject.Inject
 
-class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
+class DetailFoodViewModel @Inject constructor(private val foodUseCase: FoodUseCase) : ViewModel() {
 
     private val foodId = MutableLiveData<String>()
 
