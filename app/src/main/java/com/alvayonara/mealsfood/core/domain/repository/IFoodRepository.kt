@@ -1,8 +1,6 @@
 package com.alvayonara.mealsfood.core.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.alvayonara.mealsfood.core.data.source.Resource
-import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import io.reactivex.Flowable

@@ -70,8 +70,6 @@ class DetailFoodActivity : AppCompatActivity() {
 
             tv_food_name_detail.text = it.name
 
-            Log.v("ASW", it.isFavorite.toString())
-
             var statusFavorite = it.isFavorite
             setStatusFavorite(statusFavorite)
             iv_food_favorite_button.setOnClickListener {
