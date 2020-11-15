@@ -31,6 +31,7 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription"
                 tools:src="@color/colorAccent" />
 
             <View
@@ -113,7 +114,8 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:tint="@color/green_300"
-                    app:srcCompat="@drawable/ic_favorite_border" />
+                    app:srcCompat="@drawable/ic_favorite_border"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
@@ -129,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins"
-                android:text="Area"
+                android:text="@string/area"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/poppins" />
@@ -149,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins"
-                android:text="Tags"
+                android:text="@string/tags"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/poppins" />
@@ -176,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins"
-                android:text="Instructions"
+                android:text="@string/instructions"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/poppins" />
@@ -190,24 +192,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#666666"
                 tools:text="Instructions" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="#e6e6e6" />
-
-            <TextView
-                android:id="@+id/tv_youtube"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins"
-                android:text="Youtube"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black"
-                app:fontFamily="@font/poppins" />
 
             <View
                 android:layout_width="0dp"

@@ -2,15 +2,16 @@ package com.alvayonara.mealsfood.di
 
 import com.alvayonara.mealsfood.core.domain.usecase.FoodInteractor
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import com.alvayonara.mealsfood.dashboard.DashboardViewModel
+import com.alvayonara.mealsfood.detail.DetailFoodViewModel
+import org.koin.dsl.module
+import org.koin.android.viewmodel.dsl.viewModel
 
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class AppModule {
+val useCaseModule = module {
+    factory<FoodUseCase> { FoodInteractor(get()) }
+}
 
-    @Binds
-    abstract fun provideFoodUseCase(foodInteractor: FoodInteractor): FoodUseCase
+val viewModelModule = module {
+    viewModel { DashboardViewModel(get()) }
+    viewModel { DetailFoodViewModel(get()) }
 }

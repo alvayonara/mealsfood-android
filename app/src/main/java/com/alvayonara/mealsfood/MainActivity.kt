@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.alvayonara.mealsfood.R
-import com.alvayonara.mealsfood.core.utils.ToolbarConfig
-import dagger.hilt.android.AndroidEntryPoint
+import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
+import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import kotlinx.android.synthetic.main.activity_main.*
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        ToolbarConfig.setDefaultStatusBarColor(this)
+        setDefaultStatusBarColor(this)
+        setLightStatusBar(this)
     }
 
     private fun initBottomNavBar() {

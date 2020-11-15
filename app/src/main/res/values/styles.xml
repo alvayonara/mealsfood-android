@@ -7,13 +7,6 @@
     </style>
 
     <!-- No Action Bar theme -->
-    <style name="AppTheme.noActionBar" parent="Theme.AppCompat.Light.NoActionBar"/>
-
-    <!-- Grey EditText theme -->
-    <style name="EditText.Flat.Grey" parent="@style/AppTheme">
-        <item name="android:textColorHint">@color/grey_40</item>
-        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
-        <item name="android:textColor">@color/grey_90</item>
-    </style>
+    <style name="AppTheme.noActionBar" parent="Theme.AppCompat.Light.NoActionBar" />
 
 </resources>
