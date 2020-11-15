@@ -45,6 +45,8 @@ class FavoriteFragment : Fragment() {
                 progress_bar_favorite.gone()
 
                 foodAdapter.setFoods(it)
+                view_empty_favorite_food.visibility =
+                    if (it.isNotEmpty()) View.GONE else View.VISIBLE
             })
 
             with(rv_favorite_foods) {

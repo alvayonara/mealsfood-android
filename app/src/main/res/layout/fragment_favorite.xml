@@ -7,6 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
         android:background="@android:color/white"
         android:orientation="vertical">
 
@@ -17,8 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
+
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -41,8 +42,6 @@
             android:id="@+id/rv_favorite_foods"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
             tools:listitem="@layout/item_row_favorite_food" />
     </LinearLayout>
 
@@ -54,6 +53,11 @@
         android:indeterminate="true"
         android:indeterminateTint="@color/green_300"
         android:indeterminateTintMode="src_atop" />
+
+    <include
+        android:id="@+id/view_empty_favorite_food"
+        layout="@layout/view_favorite_empty"
+        android:visibility="gone" />
 
 </RelativeLayout>
 

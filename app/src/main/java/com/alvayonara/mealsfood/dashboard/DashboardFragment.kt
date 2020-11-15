@@ -13,11 +13,12 @@ import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_DASHBOARD
+import com.alvayonara.mealsfood.core.utils.Helper
+import com.alvayonara.mealsfood.core.utils.SpacingItemDecoration
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import com.alvayonara.mealsfood.detail.DetailFoodActivity.Companion.EXTRA_FOOD_DATA
-import com.alvayonara.mealsfood.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
@@ -55,7 +56,7 @@ class DashboardFragment : Fragment() {
                         }
                         is Resource.Error -> {
                             progress_bar_dashboard.gone()
-                            Toast.makeText(context, "An Error Occured", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "An Error Occurred", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -63,23 +64,10 @@ class DashboardFragment : Fragment() {
 
             with(rv_foods) {
                 layoutManager = GridLayoutManager(context, 2)
+                addItemDecoration(SpacingItemDecoration(2, Helper.dpToPx(context, 16), true));
                 setHasFixedSize(true)
                 adapter = foodAdapter
             }
-
-            edt_dashboard_search_food.setOnClickListener {
-                initSearchFragment()
-            }
-        }
-    }
-
-    private fun initSearchFragment() {
-        val mSearchFragment = SearchFragment()
-        val mFragmentManager = fragmentManager
-        mFragmentManager?.beginTransaction()?.apply {
-            replace(R.id.frame_dashboard, mSearchFragment, SearchFragment::class.java.simpleName)
-            addToBackStack(null)
-            commit()
         }
     }
 }

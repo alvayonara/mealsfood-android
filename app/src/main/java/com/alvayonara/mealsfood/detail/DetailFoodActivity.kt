@@ -1,15 +1,15 @@
 package com.alvayonara.mealsfood.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
-import com.alvayonara.mealsfood.core.utils.ToolbarConfig
+import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
+import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.bumptech.glide.Glide
@@ -30,7 +30,6 @@ class DetailFoodActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_food)
 
         initToolbar()
-
         initView()
     }
 
@@ -59,7 +58,8 @@ class DetailFoodActivity : AppCompatActivity() {
             title = ""
             this?.setDisplayHomeAsUpEnabled(true)
         }
-        ToolbarConfig.setDefaultStatusBarColor(this)
+        setDefaultStatusBarColor(this)
+        setLightStatusBar(this)
     }
 
     private fun populateFood(food: Food?) {
@@ -86,7 +86,6 @@ class DetailFoodActivity : AppCompatActivity() {
             tv_area.text = it[0].area
             tv_tags.text = it[0].tags
             tv_food_instructions.text = it[0].instructions
-            tv_youtube.text = it[0].youtube
         }
     }
 
