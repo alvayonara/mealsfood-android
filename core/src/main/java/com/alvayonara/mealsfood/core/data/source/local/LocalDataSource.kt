@@ -3,11 +3,8 @@ package com.alvayonara.mealsfood.core.data.source.local
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodEntity
 import com.alvayonara.mealsfood.core.data.source.local.room.FoodDao
 import io.reactivex.Flowable
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalDataSource @Inject constructor(private val foodDao: FoodDao) {
+class LocalDataSource(private val foodDao: FoodDao) {
 
     fun getListFood(): Flowable<List<FoodEntity>> = foodDao.getListFood()
 

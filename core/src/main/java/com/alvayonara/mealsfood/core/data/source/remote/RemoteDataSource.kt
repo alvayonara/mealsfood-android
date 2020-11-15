@@ -11,11 +11,8 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
+class RemoteDataSource(private val apiService: ApiService) {
 
     @SuppressLint("CheckResult")
     fun getListFood(): Flowable<ApiResponse<List<FoodResponse>>> {

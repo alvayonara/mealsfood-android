@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -9,7 +9,6 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.alvayonara.mealsfood"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -18,12 +17,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,14 +24,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dynamicFeatures = [':favorite']
 }
 
 dependencies {
-    implementation project(':core')
+    implementation project(":core")
+    implementation project(":app")
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    // Rxjava reactivestreams (used in ViewModel class)
-    api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion"
 }

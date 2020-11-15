@@ -1,5 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alvayonara.mealsfood.core">
-
-    /
-</manifest>
+<manifest package="com.alvayonara.mealsfood.core" />

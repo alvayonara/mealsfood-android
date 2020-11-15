@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
@@ -19,13 +18,12 @@ import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import com.alvayonara.mealsfood.detail.DetailFoodActivity.Companion.EXTRA_FOOD_DATA
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
-    private val dashboardViewModel: DashboardViewModel by viewModels()
+    private val dashboardViewModel: DashboardViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

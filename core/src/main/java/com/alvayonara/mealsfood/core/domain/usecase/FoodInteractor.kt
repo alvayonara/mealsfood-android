@@ -5,9 +5,8 @@ import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import io.reactivex.Flowable
-import javax.inject.Inject
 
-class FoodInteractor @Inject constructor(private val foodRepository: IFoodRepository): FoodUseCase {
+class FoodInteractor(private val foodRepository: IFoodRepository): FoodUseCase {
 
     override fun getListFood(): Flowable<Resource<List<Food>>> = foodRepository.getListFood()
 

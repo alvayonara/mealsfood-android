@@ -13,6 +13,6 @@
     <fragment
         android:id="@+id/navigation_favorite"
         android:name="com.alvayonara.mealsfood.favorite.FavoriteFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_favorite" />
 
 </navigation>

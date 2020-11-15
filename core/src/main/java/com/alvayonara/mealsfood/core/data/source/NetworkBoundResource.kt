@@ -30,6 +30,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             }
         mCompositeDisposable.add(db)
     }
+
     protected open fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): Flowable<ResultType>
@@ -49,8 +50,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             .doOnComplete {
                 mCompositeDisposable.dispose()
             }
-            .subscribe{ response ->
-                when(response){
+            .subscribe { response ->
+                when (response) {
                     is ApiResponse.Success -> {
                         saveCallResult(response.data)
                         val dbSource = loadFromDB()
@@ -80,6 +81,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             }
         mCompositeDisposable.add(response)
     }
+
     fun asFlowable(): Flowable<Resource<ResultType>> =
         result.toFlowable(BackpressureStrategy.BUFFER)
 }

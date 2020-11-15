@@ -2,24 +2,23 @@ package com.alvayonara.mealsfood.favorite
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
-import dagger.hilt.android.AndroidEntryPoint
+import com.alvayonara.mealsfood.di.favoriteModule
 import kotlinx.android.synthetic.main.fragment_favorite.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +27,8 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        loadKoinModules(favoriteModule)
 
         if (activity != null) {
             val foodAdapter = FoodAdapter(FoodAdapter.TYPE_FAVORITE).apply {

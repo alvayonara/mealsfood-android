@@ -23,7 +23,7 @@
             android:layout_height="70dp"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
-            tools:src="@color/colorAccent" />
+            tools:src="@android:color/black" />
     </androidx.cardview.widget.CardView>
 
     <TextView

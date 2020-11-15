@@ -2,7 +2,6 @@ package com.alvayonara.mealsfood.detail
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.alvayonara.mealsfood.R
@@ -13,13 +12,12 @@ import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.bumptech.glide.Glide
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail_food.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class DetailFoodActivity : AppCompatActivity() {
 
-    private val detailFoodViewModel: DetailFoodViewModel by viewModels()
+    private val detailFoodViewModel: DetailFoodViewModel by viewModel()
 
     companion object {
         const val EXTRA_FOOD_DATA = "extra_food_data"
