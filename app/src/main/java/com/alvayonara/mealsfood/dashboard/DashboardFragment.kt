@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
@@ -44,7 +45,7 @@ class DashboardFragment : Fragment() {
                 }
             }
 
-            dashboardViewModel.food.observe(viewLifecycleOwner, {
+            dashboardViewModel.food.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     when (it) {
                         is Resource.Loading -> progress_bar_dashboard.visible()

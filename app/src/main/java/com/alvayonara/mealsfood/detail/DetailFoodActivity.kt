@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
@@ -40,7 +41,7 @@ class DetailFoodActivity : AppCompatActivity() {
 
             progress_bar_food_detail.visible()
 
-            detailFoodViewModel.foodDetail.observe(this, {
+            detailFoodViewModel.foodDetail.observe(this, Observer {
                 progress_bar_food_detail.gone()
 
                 if (it != null) {
