@@ -8,11 +8,11 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("api/json/v1/1/filter.php?c=Seafood")
+    @GET("filter.php?c=Seafood")
     fun getListFood(
     ): Flowable<ListFoodResponse>
 
-    @GET("api/json/v1/1/lookup.php?")
+    @GET("lookup.php?")
     fun getFoodDetailById(
         @Query("i") foodId: String?,
     ): Flowable<ListDetailResponse>

@@ -1,18 +1,25 @@
 package com.alvayonara.mealsfood
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
 import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
-import kotlinx.android.synthetic.main.activity_main.*
+import com.alvayonara.mealsfood.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private var navController: NavController? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initToolbar()
         initBottomNavBar()
@@ -24,7 +31,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNavBar() {
-        val navController = findNavController(R.id.nav_host_fragment)
-        nav_view.setupWithNavController(navController)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        binding.navView.setOnNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_dashboard -> {
+                navController?.navigate(R.id.navigation_dashboard)
+            }
+            R.id.navigation_favorite -> {
+                navController?.navigate(R.id.navigation_favorite)
+            }
+        }
+        return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

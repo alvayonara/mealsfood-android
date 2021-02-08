@@ -12,7 +12,7 @@ import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
 import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import com.alvayonara.mealsfood.di.favoriteModule
-import kotlinx.android.synthetic.main.fragment_favorite.*
+import com.alvayonara.mealsfood.favorite.databinding.FragmentFavoriteBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
@@ -20,10 +20,16 @@ class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
 
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_favorite, container, false)
+    ): View?{
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,17 +46,15 @@ class FavoriteFragment : Fragment() {
                 }
             }
 
-            progress_bar_favorite.visible()
-
+            binding.progressBarFavorite.visible()
             favoriteViewModel.favoriteFood.observe(viewLifecycleOwner, {
-                progress_bar_favorite.gone()
-
+                binding.progressBarFavorite.gone()
                 foodAdapter.setFoods(it)
-                view_empty_favorite_food.visibility =
+                binding.viewEmptyFavoriteFood.root.visibility =
                     if (it.isNotEmpty()) View.GONE else View.VISIBLE
             })
 
-            with(rv_favorite_foods) {
+            with(binding.rvFavoriteFoods) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = foodAdapter

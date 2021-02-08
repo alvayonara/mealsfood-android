@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alvayonara.mealsfood.core.R
+import com.alvayonara.mealsfood.core.databinding.ItemRowFavoriteFoodBinding
+import com.alvayonara.mealsfood.core.databinding.ItemRowFoodBinding
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_row_favorite_food.view.*
@@ -28,7 +30,6 @@ class FoodAdapter constructor(private val typeView: Int) :
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val rowLayout = when (typeView) {
             TYPE_DASHBOARD -> R.layout.item_row_food
@@ -51,17 +52,25 @@ class FoodAdapter constructor(private val typeView: Int) :
         holder.bindItem(listFoods[position], typeView)
 
     inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private lateinit var bindingRowFood: ItemRowFoodBinding
+        private lateinit var bindingRowFavoriteFood: ItemRowFavoriteFoodBinding
+
         fun bindItem(food: Food, typeView: Int) {
             with(itemView) {
+                when(typeView) {
+                    TYPE_DASHBOARD -> bindingRowFood = ItemRowFoodBinding.bind(itemView)
+                    TYPE_FAVORITE -> bindingRowFavoriteFood = ItemRowFavoriteFoodBinding.bind(itemView)
+                }
+
                 val foodImageView = when (typeView) {
-                    TYPE_DASHBOARD -> iv_food
-                    TYPE_FAVORITE -> iv_food_favorite
+                    TYPE_DASHBOARD -> bindingRowFood.ivFood
+                    TYPE_FAVORITE -> bindingRowFavoriteFood.ivFoodFavorite
                     else -> throw IllegalArgumentException("Invalid view type")
                 }
 
                 val foodTextView = when (typeView) {
-                    TYPE_DASHBOARD -> tv_food
-                    TYPE_FAVORITE -> tv_food_favorite
+                    TYPE_DASHBOARD -> bindingRowFood.tvFood
+                    TYPE_FAVORITE -> bindingRowFavoriteFood.tvFoodFavorite
                     else -> throw IllegalArgumentException("Invalid view type")
                 }
 

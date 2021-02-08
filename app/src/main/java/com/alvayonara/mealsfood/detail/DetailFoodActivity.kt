@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
@@ -12,13 +11,14 @@ import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
 import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
+import com.alvayonara.mealsfood.databinding.ActivityDetailFoodBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_detail_food.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFoodActivity : AppCompatActivity() {
 
     private val detailFoodViewModel: DetailFoodViewModel by viewModel()
+    private lateinit var binding: ActivityDetailFoodBinding
 
     companion object {
         const val EXTRA_FOOD_DATA = "extra_food_data"
@@ -26,7 +26,8 @@ class DetailFoodActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_food)
+        binding = ActivityDetailFoodBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initToolbar()
         initView()
@@ -38,21 +39,16 @@ class DetailFoodActivity : AppCompatActivity() {
             populateFood(foodData)
 
             detailFoodViewModel.setSelectedFood(foodData.id)
-
-            progress_bar_food_detail.visible()
-
-            detailFoodViewModel.foodDetail.observe(this, Observer {
-                progress_bar_food_detail.gone()
-
-                if (it != null) {
-                    populateDetail(it)
-                }
+            binding.progressBarFoodDetail.visible()
+            detailFoodViewModel.foodDetail.observe(this, {
+                binding.progressBarFoodDetail.gone()
+                if (it != null) populateDetail(it)
             })
         }
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         with(supportActionBar) {
             title = ""
             this?.setDisplayHomeAsUpEnabled(true)
@@ -65,13 +61,13 @@ class DetailFoodActivity : AppCompatActivity() {
         food?.let {
             Glide.with(this)
                 .load(it.thumb)
-                .into(iv_food_detail)
+                .into(binding.ivFoodDetail)
 
-            tv_food_name_detail.text = it.name
+            binding.tvFoodNameDetail.text = it.name
 
             var statusFavorite = it.isFavorite
             setStatusFavorite(statusFavorite)
-            iv_food_favorite_button.setOnClickListener {
+            binding.ivFoodFavoriteButton.setOnClickListener {
                 statusFavorite = !statusFavorite
                 detailFoodViewModel.setFavoriteFood(food, statusFavorite)
                 setStatusFavorite(statusFavorite)
@@ -81,23 +77,27 @@ class DetailFoodActivity : AppCompatActivity() {
 
     private fun populateDetail(detail: List<Detail>?) {
         detail?.let {
-            tv_food_category.text = it[0].category
-            tv_area.text = it[0].area
-            tv_tags.text = it[0].tags
-            tv_food_instructions.text = it[0].instructions
+            it[0].let {
+                with(binding) {
+                    tvFoodCategory.text = it.category
+                    tvArea.text = it.area
+                    tvTags.text = it.tags
+                    tvFoodInstructions.text = it.instructions
+                }
+            }
         }
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            iv_food_favorite_button.setImageDrawable(
+            binding.ivFoodFavoriteButton.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_favorite
                 )
             )
         } else {
-            iv_food_favorite_button.setImageDrawable(
+            binding.ivFoodFavoriteButton.setImageDrawable(
                 ContextCompat.getDrawable(
                     this,
                     R.drawable.ic_favorite_border
