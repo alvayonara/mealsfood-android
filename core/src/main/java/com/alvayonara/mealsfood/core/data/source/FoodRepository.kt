@@ -3,8 +3,7 @@ package com.alvayonara.mealsfood.core.data.source
 import com.alvayonara.mealsfood.core.data.source.local.LocalDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
-import com.alvayonara.mealsfood.core.data.source.remote.response.FoodResponse
-import com.alvayonara.mealsfood.core.domain.model.Detail
+import com.alvayonara.mealsfood.core.data.source.remote.response.FoodListResponse
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import com.alvayonara.mealsfood.core.utils.AppExecutors
@@ -20,38 +19,55 @@ class FoodRepository(
 ) : IFoodRepository {
 
     override fun getListFood(): Flowable<Resource<List<Food>>> =
-        object : NetworkBoundResource<List<Food>, List<FoodResponse>>() {
+        object : NetworkBoundResource<List<Food>, List<FoodListResponse>>() {
             override fun loadFromDB(): Flowable<List<Food>> = localDataSource.getListFood().map {
-                DataMapper.mapFoodEntitiesToDomain(it)
+                DataMapper.mapFoodListEntitiesToDomain(it)
             }
 
             override fun shouldFetch(data: List<Food>?): Boolean =
                 data == null || data.isEmpty()
 
-            override fun createCall(): Flowable<ApiResponse<List<FoodResponse>>> =
+            override fun createCall(): Flowable<ApiResponse<List<FoodListResponse>>> =
                 remoteDataSource.getListFood()
 
-            override fun saveCallResult(data: List<FoodResponse>) {
-                val foodList = DataMapper.mapFoodResponsesToEntities(data)
-                localDataSource.insertFood(foodList)
+            override fun saveCallResult(data: List<FoodListResponse>) {
+                val foodList = DataMapper.mapFoodListResponsesToEntities(data)
+                localDataSource.insertFoodList(foodList)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
             }
         }.asFlowable()
 
-    override fun getFoodDetailById(foodId: String): Flowable<List<Detail>> =
-        remoteDataSource.getFoodDetailById(foodId).map {
-            DataMapper.mapDetailResponsesToDomain(it)
+    override fun getListFoodByCategory(strCategory: String): Flowable<Resource<List<Food>>> =
+        remoteDataSource.getListFoodByCategory(strCategory)
+
+    override fun getListFoodByArea(strArea: String): Flowable<Resource<List<Food>>> =
+        remoteDataSource.getListFoodByArea(strArea)
+
+    override fun getFoodDetailById(idMeal: String): Flowable<Resource<List<Food>>> =
+        remoteDataSource.getFoodDetailById(idMeal)
+
+    override fun getFavoriteFood(): Flowable<List<Food>> =
+        localDataSource.getFavoriteFood().map {
+            DataMapper.mapFoodDetailEntitiesToDomain(it)
         }
 
-    override fun getFavoriteFood(): Flowable<List<Food>> = localDataSource.getFavoriteFood().map {
-        DataMapper.mapFoodEntitiesToDomain(it)
+    override fun checkIsFavoriteFood(idMeal: String): Flowable<Int> =
+        localDataSource.checkIsFavoriteFood(idMeal)
+
+    override fun insertFavoriteFood(food: Food) {
+        localDataSource.insertFavoriteFood(DataMapper.mapFoodDomainToEntity(food))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 
-    override fun setFavoriteFood(food: Food, state: Boolean) {
-        val foodEntity = DataMapper.mapFoodDomainToEntity(food)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteFood(foodEntity, state) }
+    override fun deleteFavoriteFood(food: Food) {
+        localDataSource.deleteFavoriteFood(DataMapper.mapFoodDomainToEntity(food))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 }
 

@@ -95,15 +95,6 @@
                         app:fontFamily="@font/poppins"
                         tools:text="Food Name" />
 
-                    <TextView
-                        android:id="@+id/tv_food_category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_40"
-                        tools:text="Category" />
-
                 </LinearLayout>
 
                 <ImageButton
@@ -123,7 +114,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
                 android:background="#e6e6e6" />
 
             <TextView
@@ -131,25 +121,59 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins"
+                android:text="@string/category"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                app:fontFamily="@font/poppins" />
+
+            <Button
+                android:id="@+id/btn_food_category"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:background="@drawable/btn_rounded_green"
+                android:fontFamily="@font/poppins"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="0dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@android:color/white"
+                android:visibility="invisible"
+                tools:text="Category" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="@string/area"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 app:fontFamily="@font/poppins" />
 
-            <TextView
-                android:id="@+id/tv_area"
+            <Button
+                android:id="@+id/btn_food_area"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="-5dp"
+                android:background="@drawable/btn_rounded_green"
                 android:fontFamily="@font/poppins"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_40"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="0dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:textColor="@android:color/white"
+                android:visibility="invisible"
                 tools:text="Area" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/tags"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"

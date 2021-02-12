@@ -1,23 +1,26 @@
 package com.alvayonara.mealsfood.detail
 
 import androidx.lifecycle.*
-import com.alvayonara.mealsfood.core.domain.model.Detail
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
 
 class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
 
-    private val foodId = MutableLiveData<String>()
+    private val idMeal = MutableLiveData<String>()
 
-    fun setSelectedFood(foodId: String) {
-        this.foodId.value = foodId
+    fun setSelectedIdMeal(idMeal: String) {
+        this.idMeal.value = idMeal
     }
 
-    var foodDetail: LiveData<List<Detail>> =
-        Transformations.switchMap(foodId) {
-            LiveDataReactiveStreams.fromPublisher(foodUseCase.getFoodDetailById(it))
-        }
+    var foodDetail = Transformations.switchMap(idMeal) {
+        LiveDataReactiveStreams.fromPublisher(foodUseCase.getFoodDetailById(it))
+    }
 
-    fun setFavoriteFood(food: Food, newStatus: Boolean) =
-        foodUseCase.setFavoriteFood(food, newStatus)
+    var checkIsFoodFavorite = Transformations.switchMap(idMeal) {
+        LiveDataReactiveStreams.fromPublisher(foodUseCase.checkIsFavoriteFood(it))
+    }
+
+    fun insertFavoriteFood(food: Food) = foodUseCase.insertFavoriteFood(food)
+
+    fun deleteFavoriteFood(food: Food) = foodUseCase.deleteFavoriteFood(food)
 }

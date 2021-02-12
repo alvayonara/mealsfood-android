@@ -5,10 +5,11 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_favorite">Favorite</string>
     <string name="favorite_food">Favorite Food</string>
+    <string name="category">Category</string>
     <string name="area">Area</string>
     <string name="tags">Tags</string>
     <string name="instructions">Instructions</string>
     <string name="dashboard_header">Simple way to find\nTasty food</string>
-    <string name="dashboard_title">Seafood</string>
+    <string name="dashboard_title">Beef</string>
     <string name="empty_text">No Favorite Food, yet</string>
 </resources>
