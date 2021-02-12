@@ -1,6 +1,5 @@
 package com.alvayonara.mealsfood.favorite
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
+import com.alvayonara.mealsfood.core.utils.IOnBackPressed
 import com.alvayonara.mealsfood.core.utils.gone
+import com.alvayonara.mealsfood.core.utils.navigate
 import com.alvayonara.mealsfood.core.utils.visible
-import com.alvayonara.mealsfood.detail.DetailFoodActivity
 import com.alvayonara.mealsfood.di.favoriteModule
 import com.alvayonara.mealsfood.favorite.databinding.FragmentFavoriteBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(), IOnBackPressed {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
 
@@ -26,7 +26,7 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?{
+    ): View? {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,12 +37,11 @@ class FavoriteFragment : Fragment() {
         loadKoinModules(favoriteModule)
 
         if (activity != null) {
-            val foodAdapter = FoodAdapter(FoodAdapter.TYPE_FAVORITE).apply {
+            val foodAdapter = FoodAdapter(FoodAdapter.TYPE_LIST).apply {
                 onItemClick = {
-                    val intent = Intent(requireActivity(), DetailFoodActivity::class.java).putExtra(
-                        DetailFoodActivity.EXTRA_FOOD_DATA, it
-                    )
-                    startActivity(intent)
+                    val nav =
+                        FavoriteFragmentDirections.actionNavigationFavoriteToDetailFoodFragment(it)
+                    navigate(nav)
                 }
             }
 
@@ -60,5 +59,9 @@ class FavoriteFragment : Fragment() {
                 adapter = foodAdapter
             }
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

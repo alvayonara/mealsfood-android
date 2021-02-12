@@ -1,6 +1,6 @@
 package com.alvayonara.mealsfood.core.utils
 
-class ApiUrl {
+class ConstFood {
 
     companion object {
         const val CATEGORY_BEEF = "Beef"

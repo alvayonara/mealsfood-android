@@ -1,6 +1,5 @@
 package com.alvayonara.mealsfood.dashboard
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
-import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_DASHBOARD
-import com.alvayonara.mealsfood.core.utils.Helper
-import com.alvayonara.mealsfood.core.utils.SpacingItemDecoration
-import com.alvayonara.mealsfood.core.utils.gone
-import com.alvayonara.mealsfood.core.utils.visible
+import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_GRID
+import com.alvayonara.mealsfood.core.utils.*
+import com.alvayonara.mealsfood.core.utils.ConstFood.Companion.CATEGORY_SEAFOOD
 import com.alvayonara.mealsfood.databinding.FragmentDashboardBinding
-import com.alvayonara.mealsfood.detail.DetailFoodActivity
-import com.alvayonara.mealsfood.detail.DetailFoodActivity.Companion.EXTRA_FOOD_DATA
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), IOnBackPressed {
 
     private val dashboardViewModel: DashboardViewModel by viewModel()
 
@@ -39,12 +34,10 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val foodAdapter = FoodAdapter(TYPE_DASHBOARD).apply {
+            val foodAdapter = FoodAdapter(TYPE_GRID).apply {
                 onItemClick = {
-                    val intent = Intent(requireActivity(), DetailFoodActivity::class.java).putExtra(
-                        EXTRA_FOOD_DATA, it
-                    )
-                    startActivity(intent)
+                    val nav = DashboardFragmentDirections.actionNavigationDashboardToDetailFoodFragment(it)
+                    navigate(nav)
                 }
             }
 
@@ -71,5 +64,9 @@ class DashboardFragment : Fragment() {
                 adapter = foodAdapter
             }
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

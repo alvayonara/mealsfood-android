@@ -11,6 +11,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        def nav_version = "2.3.3"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
@@ -47,7 +49,7 @@ ext {
     retrofitVersion = '2.9.0'
     retrofitGsonVersion = '2.9.0'
     loggingInterceptorVersion = '4.9.0'
-    roomVersion = '2.2.5'
+    roomVersion = '2.2.6'
     rxjavaVersion = '2.2.19'
     rxandroidVersion = '2.1.1'
     lifecycleVersion = '2.2.0'

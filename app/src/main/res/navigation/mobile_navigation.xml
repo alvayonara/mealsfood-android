@@ -8,11 +8,63 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.alvayonara.mealsfood.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
         android:name="com.alvayonara.mealsfood.favorite.FavoriteFragment"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFoodFragment"
+        android:name="com.alvayonara.mealsfood.detail.DetailFoodFragment"
+        android:label="DetailFoodFragment" >
+        <action
+            android:id="@+id/action_detailFoodFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <argument
+            android:name="food"
+            app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
+        <action
+            android:id="@+id/action_detailFoodFragment_to_navigation_favorite"
+            app:destination="@id/navigation_favorite" />
+        <action
+            android:id="@+id/action_detailFoodFragment_to_areaFoodFragment"
+            app:destination="@id/areaFoodFragment" />
+        <action
+            android:id="@+id/action_detailFoodFragment_to_categoryFoodFragment"
+            app:destination="@id/categoryFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFoodFragment"
+        android:name="com.alvayonara.mealsfood.category.CategoryFoodFragment"
+        android:label="CategoryFoodFragment" >
+        <argument
+            android:name="food"
+            app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
+        <action
+            android:id="@+id/action_categoryFoodFragment_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/areaFoodFragment"
+        android:name="com.alvayonara.mealsfood.area.AreaFoodFragment"
+        android:label="AreaFoodFragment" >
+        <argument
+            android:name="food"
+            app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
+        <action
+            android:id="@+id/action_areaFoodFragment_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment" />
+    </fragment>
 
 </navigation>

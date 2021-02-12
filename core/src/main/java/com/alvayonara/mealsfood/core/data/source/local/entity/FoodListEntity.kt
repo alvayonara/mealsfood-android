@@ -8,19 +8,11 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "food")
-data class FoodEntity(
+@Entity(tableName = "foodList")
+data class FoodListEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "foodId")
-    var foodId: String,
-
-    @ColumnInfo(name = "name")
-    var name: String,
-
-    @ColumnInfo(name = "thumb")
-    var thumb: String,
-
-    @ColumnInfo(name = "isFavorite")
-    var isFavorite: Boolean = false
+    @ColumnInfo(name = "idMeal") var idMeal: String,
+    @ColumnInfo(name = "strMeal") var strMeal: String? = "",
+    @ColumnInfo(name = "strMealThumb") var strMealThumb: String? = ""
 ) : Parcelable

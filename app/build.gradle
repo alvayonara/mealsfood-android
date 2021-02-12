@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply from: '../shared_dependencies.gradle'
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.alvayonara.mealsfood"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -39,6 +40,7 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     // Rxjava reactivestreams (used in ViewModel class)

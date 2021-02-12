@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/action_dashboard"
         android:icon="@drawable/ic_dashboard"
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/action_favorite"
         android:icon="@drawable/menu_favorite_selector"
         android:title="@string/title_favorite" />
 

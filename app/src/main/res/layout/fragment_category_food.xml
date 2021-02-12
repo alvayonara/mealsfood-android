@@ -20,16 +20,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/iv_category_back"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/favorite_food"
+                android:text="@string/category"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_food_category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/green_500"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Lorem Ipsum" />
 
         </LinearLayout>
 
@@ -38,7 +56,7 @@
             android:layout_height="@dimen/spacing_large" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favorite_foods"
+            android:id="@+id/rv_category_foods"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_row_food_list" />
@@ -49,18 +67,13 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progress_bar_favorite"
+        android:id="@+id/progress_bar_category_foods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:indeterminate="true"
         android:indeterminateTint="@color/green_300"
         android:indeterminateTintMode="src_atop" />
-
-    <include
-        android:id="@+id/view_empty_favorite_food"
-        layout="@layout/view_favorite_empty"
-        android:visibility="gone" />
 
 </RelativeLayout>
 

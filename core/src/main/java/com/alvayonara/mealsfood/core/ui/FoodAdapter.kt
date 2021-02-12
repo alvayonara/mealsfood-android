@@ -5,12 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alvayonara.mealsfood.core.R
-import com.alvayonara.mealsfood.core.databinding.ItemRowFavoriteFoodBinding
-import com.alvayonara.mealsfood.core.databinding.ItemRowFoodBinding
+import com.alvayonara.mealsfood.core.databinding.ItemRowFoodGridBinding
+import com.alvayonara.mealsfood.core.databinding.ItemRowFoodListBinding
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_row_favorite_food.view.*
-import kotlinx.android.synthetic.main.item_row_food.view.*
 
 class FoodAdapter constructor(private val typeView: Int) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
@@ -19,8 +17,8 @@ class FoodAdapter constructor(private val typeView: Int) :
     var onItemClick: ((Food) -> Unit)? = null
 
     companion object {
-        const val TYPE_DASHBOARD = 1
-        const val TYPE_FAVORITE = 2
+        const val TYPE_GRID = 1
+        const val TYPE_LIST = 2
     }
 
     fun setFoods(foods: List<Food>?) {
@@ -32,8 +30,8 @@ class FoodAdapter constructor(private val typeView: Int) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val rowLayout = when (typeView) {
-            TYPE_DASHBOARD -> R.layout.item_row_food
-            TYPE_FAVORITE -> R.layout.item_row_favorite_food
+            TYPE_GRID -> R.layout.item_row_food_grid
+            TYPE_LIST -> R.layout.item_row_food_list
             else -> throw IllegalArgumentException("Invalid view type")
         }
 
@@ -52,34 +50,34 @@ class FoodAdapter constructor(private val typeView: Int) :
         holder.bindItem(listFoods[position], typeView)
 
     inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var bindingRowFood: ItemRowFoodBinding
-        private lateinit var bindingRowFavoriteFood: ItemRowFavoriteFoodBinding
+        private lateinit var bindingRowFoodGrid: ItemRowFoodGridBinding
+        private lateinit var bindingRowFoodList: ItemRowFoodListBinding
 
         fun bindItem(food: Food, typeView: Int) {
             with(itemView) {
                 when(typeView) {
-                    TYPE_DASHBOARD -> bindingRowFood = ItemRowFoodBinding.bind(itemView)
-                    TYPE_FAVORITE -> bindingRowFavoriteFood = ItemRowFavoriteFoodBinding.bind(itemView)
+                    TYPE_GRID -> bindingRowFoodGrid = ItemRowFoodGridBinding.bind(itemView)
+                    TYPE_LIST -> bindingRowFoodList = ItemRowFoodListBinding.bind(itemView)
                 }
 
                 val foodImageView = when (typeView) {
-                    TYPE_DASHBOARD -> bindingRowFood.ivFood
-                    TYPE_FAVORITE -> bindingRowFavoriteFood.ivFoodFavorite
+                    TYPE_GRID -> bindingRowFoodGrid.ivFood
+                    TYPE_LIST -> bindingRowFoodList.ivFoodFavorite
                     else -> throw IllegalArgumentException("Invalid view type")
                 }
 
                 val foodTextView = when (typeView) {
-                    TYPE_DASHBOARD -> bindingRowFood.tvFood
-                    TYPE_FAVORITE -> bindingRowFavoriteFood.tvFoodFavorite
+                    TYPE_GRID -> bindingRowFoodGrid.tvFood
+                    TYPE_LIST -> bindingRowFoodList.tvFoodFavorite
                     else -> throw IllegalArgumentException("Invalid view type")
                 }
 
                 food.let {
                     Glide.with(context)
-                        .load(it.thumb)
+                        .load(it.strMealThumb)
                         .into(foodImageView)
 
-                    foodTextView.text = it.name
+                    foodTextView.text = it.strMeal
                 }
             }
         }
