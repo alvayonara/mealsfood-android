@@ -2,9 +2,11 @@ package com.alvayonara.mealsfood.core.utils
 
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodDetailEntity
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodListEntity
+import com.alvayonara.mealsfood.core.data.source.local.entity.FoodRecentSearchEntity
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodDetailResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodListResponse
 import com.alvayonara.mealsfood.core.domain.model.Food
+import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
 
 object DataMapper {
 
@@ -115,5 +117,18 @@ object DataMapper {
         idMeal = input.idMeal.orEmpty(),
         strMeal = input.strMeal,
         strMealThumb = input.strMealThumb
+    )
+
+    fun mapFoodRecentSearchEntitiesToDomain(input: List<FoodRecentSearchEntity>): List<FoodRecentSearch> =
+        input.map {
+            FoodRecentSearch(
+                id = it.id,
+                strMeal = it.strMeal
+            )
+        }
+
+    fun mapFoodRecentSearchDomainToEntity(input: FoodRecentSearch) = FoodRecentSearchEntity(
+        id = 0,
+        strMeal = input.strMeal
     )
 }

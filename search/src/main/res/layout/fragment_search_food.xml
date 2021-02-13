@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/lyt_edt_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/spacing_mlarge"
+        android:paddingTop="@dimen/spacing_mlarge"
+        android:paddingRight="@dimen/spacing_mlarge"
+        android:paddingBottom="@dimen/spacing_mlarge">
+
+        <EditText
+            android:id="@+id/edt_search_food"
+            style="@style/EditText.Flat.Grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xmlarge"
+            android:background="@drawable/edit_text_round_bg"
+            android:drawableEnd="@drawable/ic_search_grey"
+            android:hint="@string/search_food"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:minHeight="@dimen/spacing_xmlarge"
+            android:paddingLeft="@dimen/spacing_middle"
+            android:paddingRight="@dimen/spacing_middle"
+            tools:ignore="Autofill,TextFields">
+
+            <requestFocus />
+        </EditText>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lyt_edt_search"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/view_search_food_layout"
+            layout="@layout/view_search_food" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_foods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
+            android:paddingBottom="@dimen/actionBarSize"
+            tools:listitem="@layout/item_row_food_list" />
+
+        <include
+            android:id="@+id/view_search_food_not_found"
+            layout="@layout/view_search_food_not_found"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_search_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/green_300"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="invisible" />
+
+</RelativeLayout>

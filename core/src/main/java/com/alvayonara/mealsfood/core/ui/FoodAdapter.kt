@@ -10,6 +10,7 @@ import com.alvayonara.mealsfood.core.databinding.ItemRowFoodListBinding
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.bumptech.glide.Glide
 
+
 class FoodAdapter constructor(private val typeView: Int) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
@@ -26,6 +27,16 @@ class FoodAdapter constructor(private val typeView: Int) :
         listFoods.clear()
         listFoods.addAll(foods)
         notifyDataSetChanged()
+    }
+
+    fun clearFoods() {
+        val size: Int = listFoods.size
+        if (size > 0) {
+            for (i in 0 until size) {
+                listFoods.removeAt(0)
+            }
+            notifyItemRangeRemoved(0, size)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -55,7 +66,7 @@ class FoodAdapter constructor(private val typeView: Int) :
 
         fun bindItem(food: Food, typeView: Int) {
             with(itemView) {
-                when(typeView) {
+                when (typeView) {
                     TYPE_GRID -> bindingRowFoodGrid = ItemRowFoodGridBinding.bind(itemView)
                     TYPE_LIST -> bindingRowFoodList = ItemRowFoodListBinding.bind(itemView)
                 }

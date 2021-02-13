@@ -2,6 +2,7 @@ package com.alvayonara.mealsfood.core.data.source.local
 
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodDetailEntity
 import com.alvayonara.mealsfood.core.data.source.local.entity.FoodListEntity
+import com.alvayonara.mealsfood.core.data.source.local.entity.FoodRecentSearchEntity
 import com.alvayonara.mealsfood.core.data.source.local.room.FoodDao
 import com.alvayonara.mealsfood.core.domain.model.Food
 import io.reactivex.Flowable
@@ -19,4 +20,8 @@ class LocalDataSource(private val foodDao: FoodDao) {
     fun insertFavoriteFood(food: FoodDetailEntity) = foodDao.insertFavoriteFood(food)
 
     fun deleteFavoriteFood(food: FoodDetailEntity) = foodDao.deleteFavoriteFood(food)
+
+    fun getRecentSearchFood(): Flowable<List<FoodRecentSearchEntity>> = foodDao.getRecentSearchFood()
+
+    fun insertRecentSearchFood(search: FoodRecentSearchEntity) = foodDao.insertRecentSearchFood(search)
 }

@@ -27,6 +27,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxbindingVersion"
 
     // Koin
     implementation "org.koin:koin-core:$koin_version"

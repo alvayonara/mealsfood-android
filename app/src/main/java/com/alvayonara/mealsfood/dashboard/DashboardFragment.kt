@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
@@ -34,6 +35,11 @@ class DashboardFragment : Fragment(), IOnBackPressed {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+            binding.edtSearchFoodDashboard.setOnClickListener {
+                val nav = DashboardFragmentDirections.actionNavigationDashboardToSearchFoodFragment()
+                navigate(nav)
+            }
+
             val foodAdapter = FoodAdapter(TYPE_GRID).apply {
                 onItemClick = {
                     val nav = DashboardFragmentDirections.actionNavigationDashboardToDetailFoodFragment(it)

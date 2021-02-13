@@ -92,9 +92,47 @@ class RemoteDataSource(private val apiService: ApiService) {
             .take(1)
             .subscribe({ response ->
                 val dataArray = response.meals!!
-                resultData.onNext(Resource.Success(DataMapper.mapFoodDetailResponsesToDomain(dataArray)))
+                resultData.onNext(
+                    Resource.Success(
+                        DataMapper.mapFoodDetailResponsesToDomain(
+                            dataArray
+                        )
+                    )
+                )
             }, { error ->
                 resultData.onNext(Resource.Error(error.message.toString()))
+            })
+
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    fun searchFood(strMeal: String): Flowable<ApiResponse<List<Food>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<Food>>>()
+
+        // Get data from remote API
+        val client = apiService.searchFood(strMeal)
+
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                val dataArray = response.meals!!
+                resultData.onNext(
+                    ApiResponse.Success(
+                        DataMapper.mapFoodListResponsesToDomain(
+                            dataArray
+                        )
+                    )
+                )
+            }, { error ->
+                // When search result not found, the json result -> "meals": null
+                // Return as null not as List<FoodListResponse> so it will throw to error subscribe
+                if (error.message == null)
+                    resultData.onNext(ApiResponse.Empty)
+                else
+                    resultData.onNext(ApiResponse.Error(error.message.toString()))
             })
 
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
