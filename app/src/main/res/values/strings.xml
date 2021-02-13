@@ -12,4 +12,6 @@
     <string name="dashboard_header">Simple way to find\nTasty food</string>
     <string name="dashboard_title">Beef</string>
     <string name="empty_text">No Favorite Food, yet</string>
+    <string name="title_search">Search</string>
+    <string name="search_food">Search food</string>
 </resources>

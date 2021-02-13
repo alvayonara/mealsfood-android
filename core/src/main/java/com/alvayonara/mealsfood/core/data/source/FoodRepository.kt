@@ -5,6 +5,7 @@ import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodListResponse
 import com.alvayonara.mealsfood.core.domain.model.Food
+import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import com.alvayonara.mealsfood.core.utils.AppExecutors
 import com.alvayonara.mealsfood.core.utils.DataMapper
@@ -48,6 +49,9 @@ class FoodRepository(
     override fun getFoodDetailById(idMeal: String): Flowable<Resource<List<Food>>> =
         remoteDataSource.getFoodDetailById(idMeal)
 
+    override fun searchFood(meal: String): Flowable<ApiResponse<List<Food>>> =
+        remoteDataSource.searchFood(meal)
+
     override fun getFavoriteFood(): Flowable<List<Food>> =
         localDataSource.getFavoriteFood().map {
             DataMapper.mapFoodDetailEntitiesToDomain(it)
@@ -65,6 +69,18 @@ class FoodRepository(
 
     override fun deleteFavoriteFood(food: Food) {
         localDataSource.deleteFavoriteFood(DataMapper.mapFoodDomainToEntity(food))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+    }
+
+    override fun getRecentSearchFood(): Flowable<List<FoodRecentSearch>> =
+        localDataSource.getRecentSearchFood().map {
+            DataMapper.mapFoodRecentSearchEntitiesToDomain(it)
+        }
+
+    override fun insertRecentSearchFood(search: FoodRecentSearch) {
+        localDataSource.insertRecentSearchFood(DataMapper.mapFoodRecentSearchDomainToEntity(search))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()

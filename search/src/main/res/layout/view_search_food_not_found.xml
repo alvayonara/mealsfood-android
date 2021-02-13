@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        app:srcCompat="@drawable/ic_search_food_not_found"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/no_result"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="#263238"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="What you searched was unfortunately not found or doesn't exist."
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

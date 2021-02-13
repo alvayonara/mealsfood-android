@@ -25,6 +25,7 @@ import com.alvayonara.mealsfood.detail.DetailFoodFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(),
+    NavController.OnDestinationChangedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
     private var navController: NavController? = null
@@ -46,11 +47,21 @@ class MainActivity : AppCompatActivity(),
 
     private fun initBottomNavBar() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController?.addOnDestinationChangedListener(this)
         binding.navView.setOnNavigationItemSelectedListener(this)
         binding.navView.selectedItemId = R.id.action_dashboard
-        supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
-            override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-                TransitionManager.beginDelayedTransition(binding.root, Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true))
+        supportFragmentManager.registerFragmentLifecycleCallbacks(object :
+            FragmentManager.FragmentLifecycleCallbacks() {
+            override fun onFragmentViewCreated(
+                fm: FragmentManager,
+                f: Fragment,
+                v: View,
+                savedInstanceState: Bundle?
+            ) {
+                TransitionManager.beginDelayedTransition(
+                    binding.root,
+                    Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+                )
                 when (f) {
                     is DetailFoodFragment -> binding.navView.gone()
                     is CategoryFoodFragment -> binding.navView.gone()
@@ -63,14 +74,20 @@ class MainActivity : AppCompatActivity(),
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_dashboard -> {
-                navController?.navigate(R.id.navigation_dashboard)
-            }
-            R.id.action_favorite -> {
-                navController?.navigate(R.id.navigation_favorite)
-            }
+            R.id.action_dashboard -> navController?.navigate(R.id.navigation_dashboard)
+            R.id.action_search -> navController?.navigate(R.id.navigation_search_food)
+            R.id.action_favorite -> navController?.navigate(R.id.navigation_favorite)
         }
         return true
+    }
+
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        if (destination.id == R.id.navigation_search_food) binding.navView.menu.getItem(1).isChecked =
+            true
     }
 
     override fun onBackPressed() {

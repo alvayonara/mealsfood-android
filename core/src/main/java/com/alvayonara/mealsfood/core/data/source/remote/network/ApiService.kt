@@ -22,4 +22,9 @@ interface ApiService {
     fun getFoodDetailById(
         @Query("i") idMeal: String?,
     ): Flowable<ListFoodDetailResponse>
+
+    @GET("search.php?")
+    fun searchFood(
+        @Query("s") strMeal: String,
+    ): Flowable<ListFoodResponse>
 }
