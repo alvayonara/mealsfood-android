@@ -20,10 +20,7 @@ class SearchFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading = _loading
-
-    private val _resetRecyclerView = MutableLiveData<Boolean>()
-    val resetRecyclerView = _resetRecyclerView
-
+    
     private val _isEditTextEmpty = MutableLiveData<Boolean>()
     val isEditTextEmpty = _isEditTextEmpty
 
