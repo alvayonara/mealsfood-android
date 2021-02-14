@@ -17,6 +17,7 @@ import com.alvayonara.mealsfood.core.utils.*
 import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredient
 import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
 import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
+import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDetailFoodBinding
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_detail_food.*
@@ -71,15 +72,12 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                     is Resource.Loading -> binding.progressBarFoodDetail.visible()
                     is Resource.Success -> {
                         binding.progressBarFoodDetail.gone()
+                        binding.layoutDetailFood.visible()
                         it.data.orEmpty().let { foodDetail ->
                             populateDetail(foodDetail)
                         }
                     }
-                    is Resource.Error -> {
-                        binding.progressBarFoodDetail.gone()
-                        Toast.makeText(requireActivity(), "An Error Occurred", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                    is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
         })
@@ -103,7 +101,6 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
 
                 tvTags.text = foodDetail.strTags
                 _expandableTextView.text = foodDetail.strInstructions
-
                 initListIngredients(foodDetail)
 
                 btnFoodCategory.setOnClickListener {

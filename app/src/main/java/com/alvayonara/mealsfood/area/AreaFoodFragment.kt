@@ -15,6 +15,7 @@ import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_LIST
 import com.alvayonara.mealsfood.core.utils.*
+import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.dashboard.DashboardViewModel
 import com.alvayonara.mealsfood.databinding.FragmentAreaFoodBinding
 import com.alvayonara.mealsfood.databinding.FragmentCategoryFoodBinding
@@ -70,10 +71,7 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
                         binding.progressBarAreaFoods.gone()
                         foodAdapter.setFoods(it.data)
                     }
-                    is Resource.Error -> {
-                        binding.progressBarAreaFoods.gone()
-                        Toast.makeText(context, "An Error Occurred", Toast.LENGTH_SHORT).show()
-                    }
+                    is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
         })
