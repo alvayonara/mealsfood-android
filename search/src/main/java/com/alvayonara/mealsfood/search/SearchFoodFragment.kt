@@ -68,7 +68,6 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     }
 
     private fun initView() {
-        showKeyboard(requireActivity(), binding.edtSearchFood)
         binding.edtSearchFood.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH
                 || actionId == EditorInfo.IME_ACTION_DONE
@@ -86,9 +85,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     private fun startSearch() {
         binding.edtSearchFood.clearFocus()
         val search = binding.edtSearchFood.text.toString()
-        if (search.isNotEmpty()) {
-            insertToRecentSearch(search)
-        }
+        if (search.isNotEmpty()) insertToRecentSearch(search)
     }
 
     private fun setupAdapter() {
@@ -194,5 +191,10 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideKeyboard(requireActivity())
     }
 }

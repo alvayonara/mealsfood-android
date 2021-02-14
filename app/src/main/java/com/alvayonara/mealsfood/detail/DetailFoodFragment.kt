@@ -7,14 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.domain.model.Food
+import com.alvayonara.mealsfood.core.domain.model.FoodIngredient
+import com.alvayonara.mealsfood.core.ui.FoodIngredientsAdapter
 import com.alvayonara.mealsfood.core.utils.*
+import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredient
 import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
 import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.databinding.FragmentDetailFoodBinding
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_detail_food.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFoodFragment : Fragment(), IOnBackPressed {
@@ -97,19 +102,38 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                 btnFoodArea.visible()
 
                 tvTags.text = foodDetail.strTags
-                tvFoodInstructions.text = foodDetail.strInstructions
+                _expandableTextView.text = foodDetail.strInstructions
+
+                initListIngredients(foodDetail)
 
                 btnFoodCategory.setOnClickListener {
                     val nav =
-                        DetailFoodFragmentDirections.actionDetailFoodFragmentToCategoryFoodFragment(foodDetail)
+                        DetailFoodFragmentDirections.actionDetailFoodFragmentToCategoryFoodFragment(
+                            foodDetail
+                        )
                     navigate(nav)
                 }
 
                 binding.btnFoodArea.setOnClickListener {
-                    val nav = DetailFoodFragmentDirections.actionDetailFoodFragmentToAreaFoodFragment(foodDetail)
+                    val nav =
+                        DetailFoodFragmentDirections.actionDetailFoodFragmentToAreaFoodFragment(
+                            foodDetail
+                        )
                     navigate(nav)
                 }
             }
+        }
+    }
+
+    private fun initListIngredients(foodDetail: Food) {
+        val foodIngredientsAdapter = FoodIngredientsAdapter().apply {
+            setIngredients(getListIngredient(foodDetail))
+        }
+
+        with(binding.rvFoodIngredients) {
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = foodIngredientsAdapter
         }
     }
 

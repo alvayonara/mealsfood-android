@@ -56,4 +56,6 @@ ext {
     lifecycleVersion = '2.2.0'
 
     koin_version = '2.1.6'
+
+    expandableTextViewVersion = '0.1.4'
 }
