@@ -1,303 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/layout_detail_food"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="@android:color/white"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            app:statusBarScrim="@android:color/white"
-            app:titleEnabled="false">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <ImageView
-                android:id="@+id/iv_food_detail"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                tools:ignore="ContentDescription"
-                tools:src="@color/colorAccent" />
+                app:contentScrim="@android:color/white"
+                app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                app:statusBarScrim="@android:color/white"
+                app:titleEnabled="false">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/gradient_food_detail"
-                android:fitsSystemWindows="true"
-                android:rotation="180" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                <ImageView
+                    android:id="@+id/iv_food_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    tools:ignore="ContentDescription"
+                    tools:src="@color/colorAccent" />
 
-            </FrameLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/gradient_food_detail"
+                    android:fitsSystemWindows="true"
+                    android:rotation="180" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    </com.google.android.material.appbar.AppBarLayout>
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:clipToPadding="false"
-        android:focusableInTouchMode="true"
-        android:scrollbars="none"
-        android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                </FrameLayout>
 
-        <LinearLayout
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
             android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="15dp">
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
 
-                    <TextView
-                        android:id="@+id/tv_food_name_detail"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="@android:color/black"
-                        app:fontFamily="@font/poppins"
-                        tools:text="Food Name" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_food_name_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:textColor="@android:color/black"
+                            app:fontFamily="@font/poppins"
+                            tools:text="Food Name" />
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/iv_food_favorite_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:tint="@color/green_300"
+                        app:srcCompat="@drawable/ic_favorite_border"
+                        tools:ignore="ContentDescription" />
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/iv_food_favorite_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:tint="@color/green_300"
-                    app:srcCompat="@drawable/ic_favorite_border"
-                    tools:ignore="ContentDescription" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="15dp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#e6e6e6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/category"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@android:color/black"
-                    app:fontFamily="@font/poppins" />
-
-                <Button
-                    android:id="@+id/btn_food_category"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-5dp"
-                    android:background="@drawable/btn_rounded_green"
-                    android:fontFamily="@font/poppins"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="0dp"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:textColor="@android:color/white"
-                    android:visibility="invisible"
-                    tools:text="Category" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/area"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@android:color/black"
-                    app:fontFamily="@font/poppins" />
-
-                <Button
-                    android:id="@+id/btn_food_area"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-5dp"
-                    android:background="@drawable/btn_rounded_green"
-                    android:fontFamily="@font/poppins"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="0dp"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                    android:textColor="@android:color/white"
-                    android:visibility="invisible"
-                    tools:text="Area" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/tags"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@android:color/black"
-                    app:fontFamily="@font/poppins" />
-
-                <TextView
-                    android:id="@+id/tv_tags"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@color/grey_40"
-                    tools:text="Tags" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#e6e6e6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/ingredients"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@android:color/black"
-                    app:fontFamily="@font/poppins" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_food_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:fillViewport="true"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_row_ingredients" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#e6e6e6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/instructions"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                    android:textColor="@android:color/black"
-                    app:fontFamily="@font/poppins" />
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/_expandableTextView"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    expandableTextView:animAlphaStart="1"
-                    expandableTextView:animDuration="300"
-                    expandableTextView:maxCollapsedLines="4">
+                    android:orientation="vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="15dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#e6e6e6" />
 
                     <TextView
-                        android:id="@+id/expandable_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/category"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@android:color/black"
+                        app:fontFamily="@font/poppins" />
+
+                    <Button
+                        android:id="@+id/btn_food_category"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-5dp"
+                        android:background="@drawable/btn_rounded_green"
+                        android:fontFamily="@font/poppins"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minHeight="0dp"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                        android:textColor="@android:color/white"
+                        android:visibility="invisible"
+                        tools:text="Category" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="#666666"
-                        tools:text="Instructions" />
+                        android:text="@string/area"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@android:color/black"
+                        app:fontFamily="@font/poppins" />
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
+                    <Button
+                        android:id="@+id/btn_food_area"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical|end"
-                        android:background="@android:color/transparent"
-                        android:padding="16dp"
-                        tools:ignore="ContentDescription" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-5dp"
+                        android:background="@drawable/btn_rounded_green"
+                        android:fontFamily="@font/poppins"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minHeight="0dp"
+                        android:textAllCaps="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                        android:textColor="@android:color/white"
+                        android:visibility="invisible"
+                        tools:text="Area" />
 
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/tags"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@android:color/black"
+                        app:fontFamily="@font/poppins" />
+
+                    <TextView
+                        android:id="@+id/tv_tags"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@color/grey_40"
+                        tools:text="Tags" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#e6e6e6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/ingredients"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@android:color/black"
+                        app:fontFamily="@font/poppins" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_food_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fillViewport="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_row_ingredients" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#e6e6e6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/instructions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                        android:textColor="@android:color/black"
+                        app:fontFamily="@font/poppins" />
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/_expandableTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        expandableTextView:animAlphaStart="1"
+                        expandableTextView:animDuration="300"
+                        expandableTextView:maxCollapsedLines="4">
+
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#666666"
+                            tools:text="Instructions" />
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|end"
+                            android:background="@android:color/transparent"
+                            android:padding="16dp"
+                            tools:ignore="ContentDescription" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.core.widget.NestedScrollView>
-
-    <RelativeLayout
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/progress_bar_food_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:shimmer_auto_start="true">
 
-        <ProgressBar
-            android:id="@+id/progress_bar_food_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/green_300"
-            android:indeterminateTintMode="src_atop" />
-    </RelativeLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include layout="@layout/view_detail_food_placeholder" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</RelativeLayout>

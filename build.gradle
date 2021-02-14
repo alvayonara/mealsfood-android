@@ -58,4 +58,5 @@ ext {
     koin_version = '2.1.6'
 
     expandableTextViewVersion = '0.1.4'
+    shimmerVersion = '0.5.0'
 }

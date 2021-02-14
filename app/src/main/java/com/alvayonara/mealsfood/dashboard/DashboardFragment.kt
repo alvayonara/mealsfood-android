@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_GRID
 import com.alvayonara.mealsfood.core.utils.*
-import com.alvayonara.mealsfood.core.utils.ConstFood.Companion.CATEGORY_SEAFOOD
+import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDashboardBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -55,10 +54,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
                             binding.progressBarDashboard.gone()
                             foodAdapter.setFoods(it.data)
                         }
-                        is Resource.Error -> {
-                            binding.progressBarDashboard.gone()
-                            Toast.makeText(context, "An Error Occurred", Toast.LENGTH_SHORT).show()
-                        }
+                        is Resource.Error -> setToast("An Error Occurred", requireActivity())
                     }
                 }
             })

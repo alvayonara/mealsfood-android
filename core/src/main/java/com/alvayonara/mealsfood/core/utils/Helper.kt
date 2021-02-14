@@ -43,12 +43,6 @@ object Helper {
     fun setToast(message: String, context: Context) =
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
-    fun showKeyboard(act: Activity, editText: EditText) {
-        (act.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-            showSoftInput(editText, 0)
-        }
-    }
-
     fun hideKeyboard(act: Activity) {
         val view = act.currentFocus
         if (view != null) {

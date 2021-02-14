@@ -13,6 +13,7 @@ import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_LIST
 import com.alvayonara.mealsfood.core.utils.*
+import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.dashboard.DashboardViewModel
 import com.alvayonara.mealsfood.databinding.FragmentCategoryFoodBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -69,10 +70,7 @@ class CategoryFoodFragment : Fragment(), IOnBackPressed {
                         binding.progressBarCategoryFoods.gone()
                         foodAdapter.setFoods(it.data)
                     }
-                    is Resource.Error -> {
-                        binding.progressBarCategoryFoods.gone()
-                        Toast.makeText(context, "An Error Occurred", Toast.LENGTH_SHORT).show()
-                    }
+                    is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
         })
