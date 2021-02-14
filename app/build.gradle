@@ -46,4 +46,6 @@ dependencies {
 
     // Rxjava reactivestreams (used in ViewModel class)
     api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion"
+
+    implementation "com.ms-square:expandableTextView:$expandableTextViewVersion"
 }

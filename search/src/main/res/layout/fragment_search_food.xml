@@ -28,10 +28,7 @@
             android:minHeight="@dimen/spacing_xmlarge"
             android:paddingLeft="@dimen/spacing_middle"
             android:paddingRight="@dimen/spacing_middle"
-            tools:ignore="Autofill,TextFields">
-
-            <requestFocus />
-        </EditText>
+            tools:ignore="Autofill,TextFields" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout

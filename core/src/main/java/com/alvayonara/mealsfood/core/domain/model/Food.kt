@@ -53,6 +53,5 @@ data class Food(
     val strMeasure17 : String? = "",
     val strMeasure18 : String? = "",
     val strMeasure19 : String? = "",
-    val strMeasure20 : String? = "",
-    val category: String? = ""
+    val strMeasure20 : String? = ""
 ): Parcelable

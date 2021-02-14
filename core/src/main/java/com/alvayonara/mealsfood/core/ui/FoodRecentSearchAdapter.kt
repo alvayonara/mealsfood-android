@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alvayonara.mealsfood.core.R
 import com.alvayonara.mealsfood.core.databinding.ItemRowSearchFoodBinding
 import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
+import com.bumptech.glide.Glide
 
 class FoodRecentSearchAdapter :
     RecyclerView.Adapter<FoodRecentSearchAdapter.FoodRecentSearchViewHolder>() {

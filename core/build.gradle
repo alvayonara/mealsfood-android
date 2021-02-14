@@ -19,6 +19,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         buildConfigField "String", "BASE_URL_TMDB", '"https://www.themealdb.com/api/json/v1/1/"'
+        buildConfigField "String", "BASE_URL_IMAGE", '"https://www.themealdb.com/images/ingredients/"'
     }
 
     buildTypes {
