@@ -11,5 +11,4 @@ abstract class EditTextStream: TextWatcher {
     }
 
     abstract fun onChanged(text: String)
-
 }

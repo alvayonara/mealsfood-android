@@ -59,4 +59,5 @@ ext {
 
     expandableTextViewVersion = '0.1.4'
     shimmerVersion = '0.5.0'
+    leakCanaryVersion = '2.4'
 }

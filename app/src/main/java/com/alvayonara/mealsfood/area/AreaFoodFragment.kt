@@ -24,6 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class AreaFoodFragment : Fragment(), IOnBackPressed {
 
     private val areaFoodViewModel: AreaFoodViewModel by viewModel()
+    private lateinit var foodAdapter: FoodAdapter
 
     private var _binding: FragmentAreaFoodBinding? = null
     private val binding get() = _binding!!
@@ -41,27 +42,41 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        if (activity != null) {
+            initView()
+            initAdapter()
+            initRecyclerView()
+            subscribeVm()
+        }
     }
 
     private fun initView() {
         args.food.let { food = it }
-        populateFoodByArea()
         with(binding) {
             tvFoodAreaName.text = food.strArea
             ivAreaBack.setOnClickListener { navigateUp() }
         }
     }
 
-    private fun populateFoodByArea() {
-        val foodAdapter = FoodAdapter(TYPE_LIST).apply {
+    private fun initAdapter() {
+        foodAdapter = FoodAdapter(TYPE_LIST).apply {
             onItemClick = {
                 val nav =
                     AreaFoodFragmentDirections.actionAreaFoodFragmentToDetailFoodFragment(it)
                 navigate(nav)
             }
         }
+    }
 
+    private fun initRecyclerView() {
+        with(binding.rvAreaFoods) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = foodAdapter
+        }
+    }
+
+    private fun subscribeVm() {
         areaFoodViewModel.setSelectedFoodArea(food.strArea.orEmpty())
         areaFoodViewModel.food.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -75,16 +90,16 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
                 }
             }
         })
-
-        with(binding.rvAreaFoods) {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = foodAdapter
-        }
     }
 
     override fun onBackPressed(): Boolean {
         navigateUp()
         return true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvAreaFoods.adapter = null
+        _binding = null
     }
 }

@@ -19,6 +19,7 @@ import org.koin.core.context.loadKoinModules
 class FavoriteFragment : Fragment(), IOnBackPressed {
 
     private val favoriteViewModel: FavoriteViewModel by viewModel()
+    private lateinit var foodAdapter: FoodAdapter
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
@@ -33,35 +34,49 @@ class FavoriteFragment : Fragment(), IOnBackPressed {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loadKoinModules(favoriteModule)
-
         if (activity != null) {
-            val foodAdapter = FoodAdapter(FoodAdapter.TYPE_LIST).apply {
-                onItemClick = {
-                    val nav =
-                        FavoriteFragmentDirections.actionNavigationFavoriteToDetailFoodFragment(it)
-                    navigate(nav)
-                }
-            }
+            initAdapter()
+            initRecyclerView()
+            subscribeVm()
+        }
+    }
 
-            binding.progressBarFavorite.visible()
-            favoriteViewModel.favoriteFood.observe(viewLifecycleOwner, {
-                binding.progressBarFavorite.gone()
-                foodAdapter.setFoods(it)
-                binding.viewEmptyFavoriteFood.root.visibility =
-                    if (it.isNotEmpty()) View.GONE else View.VISIBLE
-            })
-
-            with(binding.rvFavoriteFoods) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = foodAdapter
+    private fun initAdapter() {
+        foodAdapter = FoodAdapter(FoodAdapter.TYPE_LIST).apply {
+            onItemClick = {
+                val nav =
+                    FavoriteFragmentDirections.actionNavigationFavoriteToDetailFoodFragment(it)
+                navigate(nav)
             }
         }
     }
 
+    private fun initRecyclerView() {
+        with(binding.rvFavoriteFoods) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = foodAdapter
+        }
+    }
+
+    private fun subscribeVm() {
+        binding.progressBarFavorite.visible()
+        favoriteViewModel.favoriteFood.observe(viewLifecycleOwner, {
+            binding.progressBarFavorite.gone()
+            foodAdapter.setFoods(it)
+            binding.viewEmptyFavoriteFood.root.visibility =
+                if (it.isNotEmpty()) View.GONE else View.VISIBLE
+        })
+    }
+
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvFavoriteFoods.adapter = null
+        _binding = null
     }
 }

@@ -47,14 +47,12 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loadKoinModules(searchFoodModule)
-
         if (activity != null) {
             initView()
-            setupAdapter()
-            setupRecyclerView()
-            setupEditTextStream()
+            initAdapter()
+            initRecyclerView()
+            initEditTextStream()
             subscribeVm()
         }
     }
@@ -80,7 +78,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
         if (search.isNotEmpty()) insertToRecentSearch(search)
     }
 
-    private fun setupAdapter() {
+    private fun initAdapter() {
         foodAdapter = FoodAdapter(FoodAdapter.TYPE_LIST).apply {
             onItemClick = {
                 insertToRecentSearch(it.strMeal.orEmpty())
@@ -99,7 +97,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun setupRecyclerView() {
+    private fun initRecyclerView() {
         with(binding.rvSearchFoods) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -114,7 +112,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     }
 
     @SuppressLint("CheckResult")
-    private fun setupEditTextStream() {
+    private fun initEditTextStream() {
         searchFoodViewModel.fromView(binding.edtSearchFood)
             .debounce(300, TimeUnit.MILLISECONDS)
             .filter { text -> text.isNotEmpty() }
@@ -172,9 +170,9 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     }
 
     private fun setEditText(search: String) {
-        with(binding) {
-            edtSearchFood.setText(search)
-            edtSearchFood.clearFocus()
+        with(binding.edtSearchFood) {
+            setText(search)
+            clearFocus()
         }
     }
 
@@ -188,5 +186,8 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     override fun onDestroyView() {
         super.onDestroyView()
         hideKeyboard(requireActivity())
+        binding.rvSearchFoods.adapter = null
+        binding.viewSearchFoodLayout.rvRecentSearchFood.adapter = null
+        _binding = null
     }
 }
