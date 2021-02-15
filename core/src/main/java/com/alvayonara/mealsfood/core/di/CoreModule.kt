@@ -9,6 +9,8 @@ import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiService
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
 import com.alvayonara.mealsfood.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -21,10 +23,15 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<FoodDatabase>().foodDao() }
     single {
+        // Initialize SQLiteCipher to encrypt Database
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(BuildConfig.PASS_PHRASE.toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             FoodDatabase::class.java, "Food.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 

@@ -21,6 +21,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CategoryFoodFragment : Fragment(), IOnBackPressed {
 
     private val categoryFoodViewModel: CategoryFoodViewModel by viewModel()
+    private lateinit var foodAdapter: FoodAdapter
 
     private var _binding: FragmentCategoryFoodBinding? = null
     private val binding get() = _binding!!
@@ -40,27 +41,39 @@ class CategoryFoodFragment : Fragment(), IOnBackPressed {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             initView()
+            initAdapter()
+            initRecyclerView()
+            subscribeVm()
         }
     }
 
     private fun initView() {
         args.food.let { food = it }
-        populateFoodByCategory()
         with(binding) {
             tvFoodCategoryName.text = food.strCategory
             ivCategoryBack.setOnClickListener { navigateUp() }
         }
     }
 
-    private fun populateFoodByCategory() {
-        val foodAdapter = FoodAdapter(TYPE_LIST).apply {
+    private fun initAdapter() {
+        foodAdapter = FoodAdapter(TYPE_LIST).apply {
             onItemClick = {
                 val nav =
                     CategoryFoodFragmentDirections.actionCategoryFoodFragmentToDetailFoodFragment(it)
                 navigate(nav)
             }
         }
+    }
 
+    private fun initRecyclerView() {
+        with(binding.rvCategoryFoods) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = foodAdapter
+        }
+    }
+
+    private fun subscribeVm() {
         categoryFoodViewModel.setSelectedFoodCategory(food.strCategory.orEmpty())
         categoryFoodViewModel.food.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -74,16 +87,16 @@ class CategoryFoodFragment : Fragment(), IOnBackPressed {
                 }
             }
         })
-
-        with(binding.rvCategoryFoods) {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = foodAdapter
-        }
     }
 
     override fun onBackPressed(): Boolean {
         navigateUp()
         return true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvCategoryFoods.adapter = null
+        _binding = null
     }
 }

@@ -43,28 +43,28 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar()
-        initView()
+        if (activity != null) {
+            initToolbar()
+            initView()
+            subscribeVm()
+            checkIsFoodFavorite()
+        }
     }
 
     private fun initToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        with((activity as AppCompatActivity).supportActionBar) {
-            this?.title = ""
-            this?.setDisplayHomeAsUpEnabled(true)
+        with(binding.toolbar) {
+            setNavigationIcon(R.drawable.ic_back)
+            setNavigationOnClickListener { navigateUp() }
         }
-        setHasOptionsMenu(true)
         setDefaultStatusBarColor(requireActivity())
         setLightStatusBar(requireActivity())
     }
 
     private fun initView() {
         args.food.let { food = it }
-        getFoodDetail()
-        checkIsFoodFavorite()
     }
 
-    private fun getFoodDetail() {
+    private fun subscribeVm() {
         detailFoodViewModel.setSelectedIdMeal(food.idMeal.orEmpty())
         detailFoodViewModel.foodDetail.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -99,9 +99,14 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                 btnFoodArea.text = foodDetail.strArea
                 btnFoodArea.visible()
 
+                // Set tags
                 tvTags.text = foodDetail.strTags
-                _expandableTextView.text = foodDetail.strInstructions
+
+                // Init list ingredients
                 initListIngredients(foodDetail)
+
+                // Set instructions
+                _expandableTextView.text = foodDetail.strInstructions
 
                 btnFoodCategory.setOnClickListener {
                     val nav =
@@ -157,36 +162,23 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         with(binding.ivFoodFavoriteButton) {
-            if (statusFavorite) {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireActivity(),
-                        R.drawable.ic_favorite
-                    )
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    if (statusFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 )
-            } else {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireActivity(),
-                        R.drawable.ic_favorite_border
-                    )
-                )
-            }
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                navigateUp()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+            )
         }
     }
 
     override fun onBackPressed(): Boolean {
         navigateUp()
         return true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvFoodIngredients.adapter = null
+        _binding = null
     }
 }
