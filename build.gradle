@@ -60,4 +60,7 @@ ext {
     expandableTextViewVersion = '0.1.4'
     shimmerVersion = '0.5.0'
     leakCanaryVersion = '2.4'
+
+    sqlCipherVersion = '4.4.0'
+    sqliteKtxVersion = '2.1.0'
 }

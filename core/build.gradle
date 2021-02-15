@@ -20,6 +20,7 @@ android {
 
         buildConfigField "String", "BASE_URL_TMDB", '"https://www.themealdb.com/api/json/v1/1/"'
         buildConfigField "String", "BASE_URL_IMAGE", '"https://www.themealdb.com/images/ingredients/"'
+        buildConfigField "String", "PASS_PHRASE", '"alvayonara"'
     }
 
     buildTypes {
@@ -40,4 +41,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    // SQLCipher
+    implementation "net.zetetic:android-database-sqlcipher:$sqlCipherVersion"
+    implementation "androidx.sqlite:sqlite-ktx:$sqliteKtxVersion"
 }

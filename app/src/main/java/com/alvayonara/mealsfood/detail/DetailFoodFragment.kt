@@ -162,21 +162,12 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         with(binding.ivFoodFavoriteButton) {
-            if (statusFavorite) {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireActivity(),
-                        R.drawable.ic_favorite
-                    )
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireActivity(),
+                    if (statusFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                 )
-            } else {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireActivity(),
-                        R.drawable.ic_favorite_border
-                    )
-                )
-            }
+            )
         }
     }
 
