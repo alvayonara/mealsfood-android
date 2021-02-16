@@ -20,9 +20,9 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="70dp"
+            android:background="@color/grey_placeholder"
             android:scaleType="centerCrop"
-            tools:ignore="ContentDescription"
-            android:background="@color/grey_placeholder" />
+            tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/grey_placeholder"
         android:fontFamily="@font/poppins"
         android:maxLines="2"
         android:textColor="@android:color/black"
@@ -37,7 +38,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_poster_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster_placeholder"
-        app:layout_constraintTop_toTopOf="@+id/iv_poster_placeholder"
-        android:background="@color/grey_placeholder" />
+        app:layout_constraintTop_toTopOf="@+id/iv_poster_placeholder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

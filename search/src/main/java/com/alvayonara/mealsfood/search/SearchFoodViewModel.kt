@@ -6,11 +6,9 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
 import com.alvayonara.mealsfood.core.utils.EditTextStream
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 

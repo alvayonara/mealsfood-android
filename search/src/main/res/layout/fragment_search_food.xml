@@ -24,10 +24,10 @@
             android:hint="@string/search_food"
             android:imeOptions="actionSearch"
             android:maxLines="1"
-            android:singleLine="true"
             android:minHeight="@dimen/spacing_xmlarge"
             android:paddingLeft="@dimen/spacing_middle"
             android:paddingRight="@dimen/spacing_middle"
+            android:singleLine="true"
             tools:ignore="Autofill,TextFields" />
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alvayonara.mealsfood.core.data.source.Resource
@@ -26,7 +25,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,7 +61,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
     private fun initRecyclerView() {
         with(binding.rvFoods) {
             layoutManager = GridLayoutManager(context, 2)
-            addItemDecoration(SpacingItemDecoration(2, Helper.dpToPx(context, 16), true));
+            addItemDecoration(SpacingItemDecoration(2, Helper.dpToPx(context, 16), true))
             setHasFixedSize(true)
             adapter = foodAdapter
         }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +13,6 @@ import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_LIST
 import com.alvayonara.mealsfood.core.utils.*
 import com.alvayonara.mealsfood.core.utils.Helper.setToast
-import com.alvayonara.mealsfood.dashboard.DashboardViewModel
 import com.alvayonara.mealsfood.databinding.FragmentCategoryFoodBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -32,7 +30,7 @@ class CategoryFoodFragment : Fragment(), IOnBackPressed {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCategoryFoodBinding.inflate(inflater, container, false)
         return binding.root
     }

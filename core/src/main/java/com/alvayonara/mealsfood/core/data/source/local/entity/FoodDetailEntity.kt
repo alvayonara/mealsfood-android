@@ -12,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
 data class FoodDetailEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "idMeal") var idMeal : String,
-    @ColumnInfo(name ="strMeal") var strMeal : String? = "",
-    @ColumnInfo(name ="strMealThumb") var strMealThumb : String? = ""
+    @ColumnInfo(name = "idMeal") var idMeal: String,
+    @ColumnInfo(name = "strMeal") var strMeal: String? = "",
+    @ColumnInfo(name = "strMealThumb") var strMealThumb: String? = ""
 ) : Parcelable
