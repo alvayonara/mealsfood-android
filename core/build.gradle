@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
+        buildConfigField "String", "HOSTNAME", '"www.themealdb.com"'
         buildConfigField "String", "BASE_URL_TMDB", '"https://www.themealdb.com/api/json/v1/1/"'
         buildConfigField "String", "BASE_URL_IMAGE", '"https://www.themealdb.com/images/ingredients/"'
         buildConfigField "String", "PASS_PHRASE", '"alvayonara"'
