@@ -40,7 +40,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchFoodBinding.inflate(inflater, container, false)
         return binding.root
     }

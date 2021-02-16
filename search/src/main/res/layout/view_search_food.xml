@@ -9,13 +9,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:fontFamily="@font/poppins"
+        android:padding="16dp"
+        android:text="@string/recent_searches"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        app:fontFamily="@font/poppins"
-        android:text="@string/recent_searches" />
+        app:fontFamily="@font/poppins" />
 
     <View
         android:layout_width="wrap_content"

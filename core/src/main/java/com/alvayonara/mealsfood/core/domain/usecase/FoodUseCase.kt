@@ -1,7 +1,6 @@
 package com.alvayonara.mealsfood.core.domain.usecase
 
 import com.alvayonara.mealsfood.core.data.source.Resource
-import com.alvayonara.mealsfood.core.data.source.local.entity.FoodRecentSearchEntity
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch

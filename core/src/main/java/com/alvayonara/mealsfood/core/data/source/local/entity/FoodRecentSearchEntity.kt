@@ -10,6 +10,6 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "foodSearch")
 data class FoodRecentSearchEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id : Int,
-    @ColumnInfo(name ="strMeal") val strMeal : String = ""
+    @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = "strMeal") val strMeal: String = ""
 ) : Parcelable

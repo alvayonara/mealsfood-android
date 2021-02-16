@@ -1,9 +1,9 @@
 package com.alvayonara.mealsfood.detail
 
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvayonara.mealsfood.R
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.domain.model.Food
-import com.alvayonara.mealsfood.core.domain.model.FoodIngredient
 import com.alvayonara.mealsfood.core.ui.FoodIngredientsAdapter
 import com.alvayonara.mealsfood.core.utils.*
 import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredient
@@ -36,7 +35,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailFoodBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class FoodRecentSearch(
     val id: Int,
     val strMeal: String
-): Parcelable
+) : Parcelable

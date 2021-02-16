@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.alvayonara.mealsfood.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_navigation_dashboard_to_detailFoodFragment"
             app:destination="@id/navigation_detail_food"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/navigation_favorite"
         android:name="com.alvayonara.mealsfood.favorite.FavoriteFragment"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_navigation_favorite_to_detailFoodFragment"
             app:destination="@id/navigation_detail_food" />
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/navigation_detail_food"
         android:name="com.alvayonara.mealsfood.detail.DetailFoodFragment"
-        android:label="DetailFoodFragment" >
+        android:label="DetailFoodFragment">
         <action
             android:id="@+id/action_detailFoodFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/navigation_category_food"
         android:name="com.alvayonara.mealsfood.category.CategoryFoodFragment"
-        android:label="CategoryFoodFragment" >
+        android:label="CategoryFoodFragment">
         <argument
             android:name="food"
             app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/navigation_area_food"
         android:name="com.alvayonara.mealsfood.area.AreaFoodFragment"
-        android:label="AreaFoodFragment" >
+        android:label="AreaFoodFragment">
         <argument
             android:name="food"
             app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
@@ -75,9 +75,9 @@
     <fragment
         android:id="@+id/navigation_search_food"
         android:name="com.alvayonara.mealsfood.search.SearchFoodFragment"
-        app:moduleName="MealsFood.search"
         android:label="fragment_search_food"
-        tools:layout="@layout/fragment_search_food" >
+        app:moduleName="MealsFood.search"
+        tools:layout="@layout/fragment_search_food">
         <action
             android:id="@+id/action_searchFoodFragment_to_detailFoodFragment"
             app:destination="@id/navigation_detail_food" />

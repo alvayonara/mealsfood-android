@@ -2,12 +2,10 @@ package com.alvayonara.mealsfood.core.utils
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt

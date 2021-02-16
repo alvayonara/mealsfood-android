@@ -10,8 +10,8 @@
         android:id="@+id/layout_detail_food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:visibility="gone">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
