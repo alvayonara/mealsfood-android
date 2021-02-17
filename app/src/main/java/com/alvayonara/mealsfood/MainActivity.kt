@@ -15,8 +15,6 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.alvayonara.mealsfood.area.AreaFoodFragment
 import com.alvayonara.mealsfood.category.CategoryFoodFragment
-import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
-import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.core.utils.IOnBackPressed
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
@@ -35,14 +33,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        initToolbar()
         initBottomNavBar()
-    }
-
-    private fun initToolbar() {
-        setDefaultStatusBarColor(this)
-        setLightStatusBar(this)
     }
 
     private fun initBottomNavBar() {

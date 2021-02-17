@@ -14,8 +14,6 @@ import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.ui.FoodIngredientsAdapter
 import com.alvayonara.mealsfood.core.utils.*
 import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredient
-import com.alvayonara.mealsfood.core.utils.Helper.setDefaultStatusBarColor
-import com.alvayonara.mealsfood.core.utils.Helper.setLightStatusBar
 import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDetailFoodBinding
 import com.bumptech.glide.Glide
@@ -55,8 +53,6 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
             setNavigationIcon(R.drawable.ic_back)
             setNavigationOnClickListener { navigateUp() }
         }
-        setDefaultStatusBarColor(requireActivity())
-        setLightStatusBar(requireActivity())
     }
 
     private fun initView() {
