@@ -13,10 +13,16 @@
             android:id="@+id/action_navigation_dashboard_to_detailFoodFragment"
             app:destination="@id/navigation_detail_food"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_navigation_dashboard_to_searchFoodFragment"
-            app:destination="@id/navigation_search_food" />
+            app:destination="@id/navigation_search_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
 
     <fragment
@@ -25,7 +31,11 @@
         tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_navigation_favorite_to_detailFoodFragment"
-            app:destination="@id/navigation_detail_food" />
+            app:destination="@id/navigation_detail_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_detail_food"
@@ -33,22 +43,42 @@
         android:label="DetailFoodFragment">
         <action
             android:id="@+id/action_detailFoodFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            app:destination="@id/navigation_dashboard"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <argument
             android:name="food"
             app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
         <action
             android:id="@+id/action_detailFoodFragment_to_navigation_favorite"
-            app:destination="@id/navigation_favorite" />
+            app:destination="@id/navigation_favorite"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <action
             android:id="@+id/action_detailFoodFragment_to_areaFoodFragment"
-            app:destination="@id/navigation_area_food" />
+            app:destination="@id/navigation_area_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <action
             android:id="@+id/action_detailFoodFragment_to_categoryFoodFragment"
-            app:destination="@id/navigation_category_food" />
+            app:destination="@id/navigation_category_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
         <action
             android:id="@+id/action_detailFoodFragment_to_searchFoodFragment"
-            app:destination="@id/navigation_search_food" />
+            app:destination="@id/navigation_search_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_category_food"
@@ -59,7 +89,11 @@
             app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
         <action
             android:id="@+id/action_categoryFoodFragment_to_detailFoodFragment"
-            app:destination="@id/navigation_detail_food" />
+            app:destination="@id/navigation_detail_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_area_food"
@@ -70,7 +104,11 @@
             app:argType="com.alvayonara.mealsfood.core.domain.model.Food" />
         <action
             android:id="@+id/action_areaFoodFragment_to_detailFoodFragment"
-            app:destination="@id/navigation_detail_food" />
+            app:destination="@id/navigation_detail_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_search_food"
@@ -80,7 +118,11 @@
         tools:layout="@layout/fragment_search_food">
         <action
             android:id="@+id/action_searchFoodFragment_to_detailFoodFragment"
-            app:destination="@id/navigation_detail_food" />
+            app:destination="@id/navigation_detail_food"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"/>
     </fragment>
 
 </navigation>
