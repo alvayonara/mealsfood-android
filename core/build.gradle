@@ -19,6 +19,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         buildConfigField "String", "HOSTNAME", '"www.themealdb.com"'
+        buildConfigField "String", "HOSTNAME_SHA256", '"sha256/pz7CjjOO6yeiHWrcJ+RWljKC2pBYw+9O7XwRIl7HLn8="'
         buildConfigField "String", "BASE_URL_TMDB", '"https://www.themealdb.com/api/json/v1/1/"'
         buildConfigField "String", "BASE_URL_IMAGE", '"https://www.themealdb.com/images/ingredients/"'
         buildConfigField "String", "PASS_PHRASE", '"alvayonara"'

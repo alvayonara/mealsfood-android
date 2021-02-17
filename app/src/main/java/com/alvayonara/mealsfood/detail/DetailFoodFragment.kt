@@ -87,8 +87,8 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
             with(binding) {
                 Glide.with(requireActivity())
                     .load(foodDetail.strMealThumb)
-                    .into(binding.ivFoodDetail)
-                binding.tvFoodNameDetail.text = foodDetail.strMeal
+                    .into(ivFoodDetail)
+                tvFoodNameDetail.text = foodDetail.strMeal
 
                 // Set view food category
                 btnFoodCategory.text = foodDetail.strCategory
@@ -115,7 +115,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                     navigate(nav)
                 }
 
-                binding.btnFoodArea.setOnClickListener {
+                btnFoodArea.setOnClickListener {
                     val nav =
                         DetailFoodFragmentDirections.actionDetailFoodFragmentToAreaFoodFragment(
                             foodDetail

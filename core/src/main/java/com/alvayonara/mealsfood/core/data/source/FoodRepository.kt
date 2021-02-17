@@ -7,7 +7,6 @@ import com.alvayonara.mealsfood.core.data.source.remote.response.FoodListRespons
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
-import com.alvayonara.mealsfood.core.utils.AppExecutors
 import com.alvayonara.mealsfood.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,8 +14,7 @@ import io.reactivex.schedulers.Schedulers
 
 class FoodRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val localDataSource: LocalDataSource
 ) : IFoodRepository {
 
     override fun getListFood(): Flowable<Resource<List<Food>>> =

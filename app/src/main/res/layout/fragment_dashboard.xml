@@ -16,115 +16,93 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_large">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_mlarge" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_large"
-                android:layout_marginEnd="@dimen/spacing_large"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:fontFamily="@font/poppins"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/dashboard_header"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+                android:text="@string/dashboard_header"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/edt_search_food_dashboard"
+                style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:background="@drawable/edit_text_round_bg"
+                android:drawableEnd="@drawable/ic_search_grey"
+                android:focusable="false"
+                android:hint="@string/search_food"
+                android:minHeight="@dimen/spacing_xmlarge"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle"
+                tools:ignore="Autofill,TextFields" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:fontFamily="@font/poppins"
+                android:text="@string/dashboard_title"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-                <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="-15dp"
+                android:paddingEnd="-15dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_foods"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/item_row_food_grid" />
 
-                    <EditText
-                        android:id="@+id/edt_search_food_dashboard"
-                        style="@style/EditText.Flat.Grey"
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/progress_bar_dashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:shimmer_auto_start="true">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xmlarge"
-                        android:background="@drawable/edit_text_round_bg"
-                        android:drawableEnd="@drawable/ic_search_grey"
-                        android:focusable="false"
-                        android:hint="@string/search_food"
-                        android:minHeight="@dimen/spacing_xmlarge"
-                        android:paddingLeft="@dimen/spacing_middle"
-                        android:paddingRight="@dimen/spacing_middle"
-                        tools:ignore="Autofill,TextFields" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_large" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:text="@string/dashboard_title"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <include layout="@layout/item_row_food_grid_placeholder" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <include layout="@layout/item_row_food_grid_placeholder" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_foods"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        tools:listitem="@layout/item_row_food_grid" />
+                        <include layout="@layout/item_row_food_grid_placeholder" />
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/progress_bar_dashboard"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:shimmer_auto_start="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <include layout="@layout/item_row_food_grid_placeholder" />
-
-                            <include layout="@layout/item_row_food_grid_placeholder" />
-
-                            <include layout="@layout/item_row_food_grid_placeholder" />
-
-                        </LinearLayout>
-                    </com.facebook.shimmer.ShimmerFrameLayout>
-                </RelativeLayout>
-            </LinearLayout>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </RelativeLayout>
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="@dimen/actionBarSize" />
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 </RelativeLayout>

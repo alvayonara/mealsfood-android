@@ -65,31 +65,29 @@ class FoodAdapter constructor(private val typeView: Int) :
         private lateinit var bindingRowFoodList: ItemRowFoodListBinding
 
         fun bindItem(food: Food, typeView: Int) {
-            with(itemView) {
-                when (typeView) {
-                    TYPE_GRID -> bindingRowFoodGrid = ItemRowFoodGridBinding.bind(itemView)
-                    TYPE_LIST -> bindingRowFoodList = ItemRowFoodListBinding.bind(itemView)
-                }
+            when (typeView) {
+                TYPE_GRID -> bindingRowFoodGrid = ItemRowFoodGridBinding.bind(itemView)
+                TYPE_LIST -> bindingRowFoodList = ItemRowFoodListBinding.bind(itemView)
+            }
 
-                val foodImageView = when (typeView) {
-                    TYPE_GRID -> bindingRowFoodGrid.ivFood
-                    TYPE_LIST -> bindingRowFoodList.ivFoodFavorite
-                    else -> throw IllegalArgumentException("Invalid view type")
-                }
+            val foodImageView = when (typeView) {
+                TYPE_GRID -> bindingRowFoodGrid.ivFood
+                TYPE_LIST -> bindingRowFoodList.ivFoodFavorite
+                else -> throw IllegalArgumentException("Invalid view type")
+            }
 
-                val foodTextView = when (typeView) {
-                    TYPE_GRID -> bindingRowFoodGrid.tvFood
-                    TYPE_LIST -> bindingRowFoodList.tvFoodFavorite
-                    else -> throw IllegalArgumentException("Invalid view type")
-                }
+            val foodTextView = when (typeView) {
+                TYPE_GRID -> bindingRowFoodGrid.tvFood
+                TYPE_LIST -> bindingRowFoodList.tvFoodFavorite
+                else -> throw IllegalArgumentException("Invalid view type")
+            }
 
-                food.let {
-                    Glide.with(context)
-                        .load(it.strMealThumb)
-                        .into(foodImageView)
+            food.let {
+                Glide.with(itemView.context)
+                    .load(it.strMealThumb)
+                    .into(foodImageView)
 
-                    foodTextView.text = it.strMeal
-                }
+                foodTextView.text = it.strMeal
             }
         }
 

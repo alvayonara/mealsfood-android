@@ -5,13 +5,11 @@ import com.google.gson.annotations.SerializedName
 data class FoodDetailResponse(
     @SerializedName("idMeal") val idMeal: String? = null,
     @SerializedName("strMeal") val strMeal: String? = null,
-    @SerializedName("strDrinkAlternate") val strDrinkAlternate: String? = null,
     @SerializedName("strCategory") val strCategory: String? = null,
     @SerializedName("strArea") val strArea: String? = null,
     @SerializedName("strInstructions") val strInstructions: String? = null,
     @SerializedName("strMealThumb") val strMealThumb: String? = null,
     @SerializedName("strTags") val strTags: String? = null,
-    @SerializedName("strYoutube") val strYoutube: String? = null,
     @SerializedName("strIngredient1") val strIngredient1: String? = null,
     @SerializedName("strIngredient2") val strIngredient2: String? = null,
     @SerializedName("strIngredient3") val strIngredient3: String? = null,

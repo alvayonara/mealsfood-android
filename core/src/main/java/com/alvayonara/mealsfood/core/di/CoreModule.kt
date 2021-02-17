@@ -8,7 +8,6 @@ import com.alvayonara.mealsfood.core.data.source.local.room.FoodDatabase
 import com.alvayonara.mealsfood.core.data.source.remote.RemoteDataSource
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiService
 import com.alvayonara.mealsfood.core.domain.repository.IFoodRepository
-import com.alvayonara.mealsfood.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
@@ -41,7 +40,7 @@ val networkModule = module {
         // Initialize Certificate Pinner
         val hostName = BuildConfig.HOSTNAME
         val certificatePinner = CertificatePinner.Builder()
-            .add(hostName, "sha256/pz7CjjOO6yeiHWrcJ+RWljKC2pBYw+9O7XwRIl7HLn8=")
+            .add(hostName, BuildConfig.HOSTNAME_SHA256)
             .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -64,6 +63,5 @@ val networkModule = module {
 val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
-    factory { AppExecutors() }
-    single<IFoodRepository> { FoodRepository(get(), get(), get()) }
+    single<IFoodRepository> { FoodRepository(get(), get()) }
 }

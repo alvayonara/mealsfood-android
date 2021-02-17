@@ -42,13 +42,11 @@ object DataMapper {
             val detail = Food(
                 idMeal = it.idMeal,
                 strMeal = it.strMeal,
-                strDrinkAlternate = it.strDrinkAlternate,
                 strCategory = it.strCategory,
                 strArea = it.strArea,
                 strInstructions = it.strInstructions,
                 strMealThumb = it.strMealThumb,
                 strTags = it.strTags ?: "-",
-                strYoutube = it.strYoutube,
                 strIngredient1 = it.strIngredient1,
                 strIngredient2 = it.strIngredient2,
                 strIngredient3 = it.strIngredient3,
