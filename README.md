@@ -7,6 +7,8 @@ Tech Stack used
 * Kotlin
 * Model View ViewModel (MVVM)
 * Clean Architecture
+* Modularization
+* Dynamic Feature
 * Offline first using NetworkBoundResource
 * Koin Dependency Injection
 * Jetpack Component (Navigation, LiveData, ViewBinding)
@@ -15,6 +17,9 @@ Tech Stack used
 * Room Database
 * RxJava (Retrofit, Room, Search)
 * Glide
+* Leak Canary
+* Certificate Pinning
+* Obfuscate ProGuard
 
 App Preview
 ---------
