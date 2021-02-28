@@ -17,6 +17,7 @@ Tech Stack used
 * Room Database
 * RxJava (Retrofit, Room, Search)
 * Glide
+* Shimmer
 * Leak Canary
 * Certificate Pinning
 * Obfuscate ProGuard
