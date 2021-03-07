@@ -70,9 +70,7 @@ class FavoriteFragment : Fragment(), IOnBackPressed {
         })
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
+    override fun onBackPressed(): Boolean = false
 
     override fun onDestroyView() {
         super.onDestroyView()

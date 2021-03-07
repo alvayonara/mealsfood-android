@@ -179,9 +179,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     private fun insertToRecentSearch(search: String) =
         searchFoodViewModel.insertRecentSearchFood(FoodRecentSearch(0, search))
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
+    override fun onBackPressed(): Boolean = false
 
     override fun onDestroyView() {
         super.onDestroyView()

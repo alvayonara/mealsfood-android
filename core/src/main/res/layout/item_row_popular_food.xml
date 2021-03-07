@@ -39,6 +39,7 @@
         android:layout_marginRight="@dimen/spacing_xsmall"
         android:maxLines="1"
         android:singleLine="true"
+        android:fontFamily="@font/poppins"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="#263238"
         tools:text="Garides" />

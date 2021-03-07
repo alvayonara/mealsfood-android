@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity(),
             R.id.action_dashboard -> navController?.navigate(R.id.navigation_dashboard)
             R.id.action_search -> navController?.navigate(R.id.navigation_search_food)
             R.id.action_favorite -> navController?.navigate(R.id.navigation_favorite)
+            R.id.action_settings -> navController?.navigate(R.id.navigation_settings)
         }
         return true
     }

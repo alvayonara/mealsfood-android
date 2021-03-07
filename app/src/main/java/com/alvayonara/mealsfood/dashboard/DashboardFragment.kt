@@ -133,9 +133,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
         })
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
-    }
+    override fun onBackPressed(): Boolean = false
 
     override fun onResume() {
         super.onResume()
@@ -146,6 +144,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
         super.onDestroyView()
         binding.rvPopularFood.adapter = null
         binding.rvFoods.adapter = null
+        binding.rvCategory.adapter = null
         _binding = null
     }
 }
