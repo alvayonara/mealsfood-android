@@ -8,6 +8,8 @@ import io.reactivex.Flowable
 
 interface FoodUseCase {
 
+    fun getPopularFood(): Flowable<Resource<List<Food>>>
+
     fun getListFood(): Flowable<Resource<List<Food>>>
 
     fun getListFoodByCategory(category: String): Flowable<Resource<List<Food>>>

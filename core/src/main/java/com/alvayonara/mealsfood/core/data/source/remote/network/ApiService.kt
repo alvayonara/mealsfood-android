@@ -8,6 +8,9 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @GET("randomselection.php")
+    fun getPopularFood(): Flowable<ListFoodResponse>
+
     @GET("filter.php?")
     fun getListFood(
         @Query("c") strCategory: String

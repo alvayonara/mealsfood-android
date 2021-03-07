@@ -17,6 +17,27 @@ class FoodRepository(
     private val localDataSource: LocalDataSource
 ) : IFoodRepository {
 
+    override fun getPopularFood(): Flowable<Resource<List<Food>>> =
+        object : NetworkBoundResource<List<Food>, List<FoodListResponse>>() {
+            override fun loadFromDB(): Flowable<List<Food>> = localDataSource.getListFood().map {
+                DataMapper.mapFoodListEntitiesToDomain(it)
+            }
+
+            override fun shouldFetch(data: List<Food>?): Boolean =
+                data == null || data.isEmpty()
+
+            override fun createCall(): Flowable<ApiResponse<List<FoodListResponse>>> =
+                remoteDataSource.getListFood()
+
+            override fun saveCallResult(data: List<FoodListResponse>) {
+                val foodList = DataMapper.mapFoodListResponsesToEntities(data)
+                localDataSource.insertFoodList(foodList)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+            }
+        }.asFlowable()
+
     override fun getListFood(): Flowable<Resource<List<Food>>> =
         object : NetworkBoundResource<List<Food>, List<FoodListResponse>>() {
             override fun loadFromDB(): Flowable<List<Food>> = localDataSource.getListFood().map {

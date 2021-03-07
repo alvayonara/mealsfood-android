@@ -17,6 +17,27 @@ import io.reactivex.subjects.PublishSubject
 class RemoteDataSource(private val apiService: ApiService) {
 
     @SuppressLint("CheckResult")
+    fun getPopularFood(): Flowable<ApiResponse<List<FoodListResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<FoodListResponse>>>()
+
+        val client = apiService.getPopularFood()
+
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({ response ->
+                val dataArray = response.meals!!
+                resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+            }, { error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+            })
+
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    // TODO
+    @SuppressLint("CheckResult")
     fun getListFood(): Flowable<ApiResponse<List<FoodListResponse>>> {
         val resultData = PublishSubject.create<ApiResponse<List<FoodListResponse>>>()
 

@@ -11,6 +11,7 @@
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="dashboard_header">Simple way to find\nTasty food</string>
+    <string name="dashboard_popular_food">Popular Food</string>
     <string name="dashboard_title">Beef</string>
     <string name="empty_text">No Favorite Food, yet</string>
     <string name="title_search">Search</string>

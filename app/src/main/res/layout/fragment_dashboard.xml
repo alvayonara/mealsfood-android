@@ -16,9 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/spacing_large"
-            android:paddingEnd="@dimen/spacing_large">
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
@@ -28,7 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
                 android:text="@string/dashboard_header"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -43,6 +42,8 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xmlarge"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginEnd="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg"
                 android:drawableEnd="@drawable/ic_search_grey"
                 android:focusable="false"
@@ -60,6 +61,77 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
+                android:text="@string/dashboard_popular_food"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_popular_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fillViewport="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingTop="@dimen/spacing_medium"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:paddingBottom="@dimen/spacing_medium"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_row_popular_food" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/progress_bar_popular_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:shimmer_auto_start="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/spacing_large"
+                        android:paddingEnd="@dimen/spacing_large">
+
+                        <include layout="@layout/item_row_popular_food_placeholder" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_medium"
+                            android:layout_height="match_parent" />
+
+                        <include layout="@layout/item_row_popular_food_placeholder" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_medium"
+                            android:layout_height="match_parent" />
+
+                        <include layout="@layout/item_row_popular_food_placeholder" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_medium"
+                            android:layout_height="match_parent" />
+
+                        <include layout="@layout/item_row_popular_food_placeholder" />
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:paddingStart="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_large"
                 android:text="@string/dashboard_title"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
@@ -67,19 +139,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="-15dp"
-                android:paddingEnd="-15dp">
+                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_foods"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     tools:listitem="@layout/item_row_food_grid" />
 
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/progress_bar_dashboard"
+                    android:id="@+id/progress_bar_category_food"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:shimmer_auto_start="true">
