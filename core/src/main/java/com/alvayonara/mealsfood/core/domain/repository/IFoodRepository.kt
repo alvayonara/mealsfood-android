@@ -10,8 +10,6 @@ interface IFoodRepository {
 
     fun getPopularFood(): Flowable<Resource<List<Food>>>
 
-    fun getListFood(): Flowable<Resource<List<Food>>>
-
     fun getListFoodByCategory(strCategory: String): Flowable<Resource<List<Food>>>
 
     fun getListFoodByArea(strArea: String): Flowable<Resource<List<Food>>>

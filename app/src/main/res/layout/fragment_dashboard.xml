@@ -126,16 +126,20 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_category"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:paddingStart="@dimen/spacing_large"
-                android:paddingEnd="@dimen/spacing_large"
-                android:text="@string/dashboard_title"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingRight="@dimen/spacing_middle"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_row_food_category" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

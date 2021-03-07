@@ -12,9 +12,6 @@ class FoodInteractor(private val foodRepository: IFoodRepository) : FoodUseCase 
     override fun getPopularFood(): Flowable<Resource<List<Food>>> =
         foodRepository.getPopularFood()
 
-    override fun getListFood(): Flowable<Resource<List<Food>>> =
-        foodRepository.getListFood()
-
     override fun getListFoodByCategory(category: String): Flowable<Resource<List<Food>>> =
         foodRepository.getListFoodByCategory(category)
 

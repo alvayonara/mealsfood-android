@@ -10,8 +10,6 @@ interface FoodUseCase {
 
     fun getPopularFood(): Flowable<Resource<List<Food>>>
 
-    fun getListFood(): Flowable<Resource<List<Food>>>
-
     fun getListFoodByCategory(category: String): Flowable<Resource<List<Food>>>
 
     fun getListFoodByArea(area: String): Flowable<Resource<List<Food>>>

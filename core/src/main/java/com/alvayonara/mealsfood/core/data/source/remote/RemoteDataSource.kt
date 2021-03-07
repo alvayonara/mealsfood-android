@@ -6,7 +6,6 @@ import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiService
 import com.alvayonara.mealsfood.core.data.source.remote.response.FoodListResponse
 import com.alvayonara.mealsfood.core.domain.model.Food
-import com.alvayonara.mealsfood.core.utils.ConstFood.Companion.CATEGORY_BEEF
 import com.alvayonara.mealsfood.core.utils.DataMapper
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -21,29 +20,6 @@ class RemoteDataSource(private val apiService: ApiService) {
         val resultData = PublishSubject.create<ApiResponse<List<FoodListResponse>>>()
 
         val client = apiService.getPopularFood()
-
-        client
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({ response ->
-                val dataArray = response.meals!!
-                resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
-            }, { error ->
-                resultData.onNext(ApiResponse.Error(error.message.toString()))
-            })
-
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
-
-    // TODO
-    @SuppressLint("CheckResult")
-    fun getListFood(): Flowable<ApiResponse<List<FoodListResponse>>> {
-        val resultData = PublishSubject.create<ApiResponse<List<FoodListResponse>>>()
-
-        // Get data from remote API
-        // Default: Category Beef
-        val client = apiService.getListFood(CATEGORY_BEEF)
 
         client
             .subscribeOn(Schedulers.computation())

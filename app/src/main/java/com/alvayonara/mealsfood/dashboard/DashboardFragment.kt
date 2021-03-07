@@ -11,7 +11,9 @@ import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_GRID
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_POPULAR_FOOD
+import com.alvayonara.mealsfood.core.ui.FoodCategoryAdapter
 import com.alvayonara.mealsfood.core.utils.*
+import com.alvayonara.mealsfood.core.utils.ConstFoodCategory.CATEGORY_BEEF
 import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDashboardBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -21,6 +23,9 @@ class DashboardFragment : Fragment(), IOnBackPressed {
     private val dashboardViewModel: DashboardViewModel by viewModel()
     private lateinit var foodPopularAdapter: FoodAdapter
     private lateinit var foodCategoryAdapter: FoodAdapter
+    private lateinit var categoryAdapter: FoodCategoryAdapter
+
+    private var category: String = CATEGORY_BEEF
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
@@ -67,6 +72,13 @@ class DashboardFragment : Fragment(), IOnBackPressed {
                 navigate(nav)
             }
         }
+
+        categoryAdapter = FoodCategoryAdapter().apply {
+            onItemClick = {
+                category = it.foodCategoryName
+                dashboardViewModel.setFoodCategory(it.foodCategoryName)
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -81,6 +93,13 @@ class DashboardFragment : Fragment(), IOnBackPressed {
             addItemDecoration(SpacingItemDecoration(2, Helper.dpToPx(context, 16), true))
             setHasFixedSize(true)
             adapter = foodCategoryAdapter
+        }
+
+        categoryAdapter.setFoodCategories(dashboardViewModel.initFoodCategory())
+        with(binding.rvCategory) {
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = categoryAdapter
         }
     }
 
@@ -116,6 +135,11 @@ class DashboardFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dashboardViewModel.setFoodCategory(category)
     }
 
     override fun onDestroyView() {
