@@ -51,7 +51,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL_TMDB)
+            .baseUrl("${BuildConfig.BASE_URL_TMDB}${BuildConfig.TMDB_KEY}/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(get())
