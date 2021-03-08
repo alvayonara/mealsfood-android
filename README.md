@@ -1,4 +1,6 @@
 # MealsFood
+<img src="https://github.com/alvayonara/MealsFood/blob/main/mealsfood-thumb.png" width="1000"/>
+
 [![alvayonara](https://circleci.com/gh/alvayonara/MealsFood.svg?style=shield)](https://circleci.com/gh/alvayonara/MealsFood) <br/>
 A Recipe Android Apps using Koin, RxJava, Jetpack (Room, ViewModel, LiveData) based on MVVM architecture purely written in Kotlin.
 
@@ -24,4 +26,4 @@ Tech Stack used
 
 App Preview
 ---------
-<img src="https://github.com/alvayonara/MealsFood/blob/main/App-preview.png" width="1000"/>
+<img src="https://github.com/alvayonara/MealsFood/blob/main/app-preview.jpg" width="1000"/>
