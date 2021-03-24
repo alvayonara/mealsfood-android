@@ -1,12 +1,10 @@
 package com.alvayonara.mealsfood.area
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alvayonara.mealsfood.core.base.BaseFragment
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
@@ -16,36 +14,24 @@ import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentAreaFoodBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AreaFoodFragment : Fragment(), IOnBackPressed {
+class AreaFoodFragment : BaseFragment<FragmentAreaFoodBinding>(), IOnBackPressed {
 
     private val areaFoodViewModel: AreaFoodViewModel by viewModel()
     private lateinit var foodAdapter: FoodAdapter
 
-    private var _binding: FragmentAreaFoodBinding? = null
-    private val binding get() = _binding!!
-
     private val args: AreaFoodFragmentArgs by navArgs()
     private lateinit var food: Food
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAreaFoodBinding.inflate(inflater, container, false)
-        return binding.root
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAreaFoodBinding
+        get() = FragmentAreaFoodBinding::inflate
+
+    override fun setup() {
+        setupView()
+        setupRecyclerView()
+        subscribeViewModel()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (activity != null) {
-            initView()
-            initAdapter()
-            initRecyclerView()
-            subscribeVm()
-        }
-    }
-
-    private fun initView() {
+    override fun setupView() {
         args.food.let { food = it }
         with(binding) {
             tvFoodAreaName.text = food.strArea
@@ -53,7 +39,7 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun initAdapter() {
+    override fun setupRecyclerView() {
         foodAdapter = FoodAdapter(TYPE_LIST).apply {
             onItemClick = {
                 val nav =
@@ -61,9 +47,7 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
                 navigate(nav)
             }
         }
-    }
 
-    private fun initRecyclerView() {
         with(binding.rvAreaFoods) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -71,7 +55,7 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun subscribeVm() {
+    override fun subscribeViewModel() {
         areaFoodViewModel.setSelectedFoodArea(food.strArea.orEmpty())
         areaFoodViewModel.food.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -87,14 +71,12 @@ class AreaFoodFragment : Fragment(), IOnBackPressed {
         })
     }
 
+    override fun releaseData() {
+        binding.rvAreaFoods.adapter = null
+    }
+
     override fun onBackPressed(): Boolean {
         navigateUp()
         return true
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.rvAreaFoods.adapter = null
-        _binding = null
     }
 }
