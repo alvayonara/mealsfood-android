@@ -17,7 +17,6 @@ import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredi
 import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDetailFoodBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_detail_food.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFoodFragment : Fragment(), IOnBackPressed {
@@ -101,7 +100,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                 initListIngredients(foodDetail)
 
                 // Set instructions
-                _expandableTextView.text = foodDetail.strInstructions
+                expandableTextView.text = foodDetail.strInstructions
 
                 btnFoodCategory.setOnClickListener {
                     val nav =

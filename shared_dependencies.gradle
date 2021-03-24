@@ -34,6 +34,9 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
     // Shimmer
     implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
 

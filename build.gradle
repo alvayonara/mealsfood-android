@@ -56,6 +56,7 @@ ext {
     lifecycleVersion = '2.3.0'
 
     koin_version = '2.1.6'
+    timberVersion = '4.7.1'
 
     expandableTextViewVersion = '0.1.4'
     shimmerVersion = '0.5.0'

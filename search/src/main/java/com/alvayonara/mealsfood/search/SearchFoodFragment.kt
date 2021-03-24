@@ -21,7 +21,6 @@ import com.alvayonara.mealsfood.di.searchFoodModule
 import com.alvayonara.search.databinding.FragmentSearchFoodBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.view_search_food.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import java.util.*
