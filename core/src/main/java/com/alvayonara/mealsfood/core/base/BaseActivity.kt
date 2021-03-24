@@ -11,8 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.viewbinding.ViewBinding
 import timber.log.Timber
 
-abstract class
-BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     private var _binding: ViewBinding? = null
     abstract val bindingInflater: (LayoutInflater) -> VB
@@ -23,16 +22,12 @@ BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadInjector()
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(requireNotNull(_binding).root)
         setup()
     }
 
-    abstract fun loadInjector()
     abstract fun setup()
-
-    protected fun getBundle() = intent.extras
 
     protected fun showToast(message: String) =
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -49,8 +44,6 @@ BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     }
 
     protected open fun releaseData() {}
-    protected open fun setupFormValidation() {}
-    protected open fun setupDialog() {}
     protected open fun setupView() {}
     protected open fun setupRecyclerView() {}
     protected open fun subscribeViewModel() {}
