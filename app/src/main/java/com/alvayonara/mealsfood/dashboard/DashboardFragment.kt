@@ -1,12 +1,10 @@
 package com.alvayonara.mealsfood.dashboard
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alvayonara.mealsfood.core.base.BaseFragment
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
 import com.alvayonara.mealsfood.core.ui.FoodAdapter.Companion.TYPE_GRID
@@ -18,7 +16,7 @@ import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDashboardBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DashboardFragment : Fragment(), IOnBackPressed {
+class DashboardFragment : BaseFragment<FragmentDashboardBinding>(), IOnBackPressed {
 
     private val dashboardViewModel: DashboardViewModel by viewModel()
     private lateinit var foodPopularAdapter: FoodAdapter
@@ -27,28 +25,16 @@ class DashboardFragment : Fragment(), IOnBackPressed {
 
     private var category: String = CATEGORY_BEEF
 
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDashboardBinding
+        get() = FragmentDashboardBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setup() {
+        setupView()
+        setupRecyclerView()
+        subscribeViewModel()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (activity != null) {
-            initView()
-            initAdapter()
-            initRecyclerView()
-            subscribeVm()
-        }
-    }
-
-    private fun initView() {
+    override fun setupView() {
         binding.edtSearchFoodDashboard.setOnClickListener {
             val nav =
                 DashboardFragmentDirections.actionNavigationDashboardToSearchFoodFragment()
@@ -56,7 +42,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun initAdapter() {
+    override fun setupRecyclerView() {
         foodPopularAdapter = FoodAdapter(TYPE_POPULAR_FOOD).apply {
             onItemClick = {
                 val nav =
@@ -79,9 +65,7 @@ class DashboardFragment : Fragment(), IOnBackPressed {
                 dashboardViewModel.setFoodCategory(it.foodCategoryName)
             }
         }
-    }
 
-    private fun initRecyclerView() {
         with(binding.rvPopularFood) {
             layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -103,8 +87,8 @@ class DashboardFragment : Fragment(), IOnBackPressed {
         }
     }
 
-    private fun subscribeVm() {
-        dashboardViewModel.foodPopular.observe(viewLifecycleOwner, {
+    override fun subscribeViewModel() {
+        dashboardViewModel.foodPopular.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.progressBarPopularFood.visible()
@@ -116,9 +100,9 @@ class DashboardFragment : Fragment(), IOnBackPressed {
                     is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
-        })
+        }
 
-        dashboardViewModel.foodCategory.observe(viewLifecycleOwner, {
+        dashboardViewModel.foodCategory.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.progressBarCategoryFood.visible()
@@ -130,7 +114,13 @@ class DashboardFragment : Fragment(), IOnBackPressed {
                     is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
-        })
+        }
+    }
+
+    override fun releaseData() {
+        binding.rvPopularFood.adapter = null
+        binding.rvFoods.adapter = null
+        binding.rvCategory.adapter = null
     }
 
     override fun onBackPressed(): Boolean = false
@@ -138,13 +128,5 @@ class DashboardFragment : Fragment(), IOnBackPressed {
     override fun onResume() {
         super.onResume()
         dashboardViewModel.setFoodCategory(category)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.rvPopularFood.adapter = null
-        binding.rvFoods.adapter = null
-        binding.rvCategory.adapter = null
-        _binding = null
     }
 }

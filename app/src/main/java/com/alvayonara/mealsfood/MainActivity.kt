@@ -2,6 +2,7 @@ package com.alvayonara.mealsfood
 
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.alvayonara.mealsfood.area.AreaFoodFragment
 import com.alvayonara.mealsfood.category.CategoryFoodFragment
+import com.alvayonara.mealsfood.core.base.BaseActivity
 import com.alvayonara.mealsfood.core.utils.IOnBackPressed
 import com.alvayonara.mealsfood.core.utils.gone
 import com.alvayonara.mealsfood.core.utils.visible
@@ -22,21 +24,20 @@ import com.alvayonara.mealsfood.databinding.ActivityMainBinding
 import com.alvayonara.mealsfood.detail.DetailFoodFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(),
+class MainActivity : BaseActivity<ActivityMainBinding>(),
     NavController.OnDestinationChangedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
 
     private var navController: NavController? = null
-    private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initBottomNavBar()
+    override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
+        get() = ActivityMainBinding::inflate
+
+    override fun setup() {
+        setupView()
     }
 
-    private fun initBottomNavBar() {
+    override fun setupView() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         navController?.addOnDestinationChangedListener(this)
         binding.navView.setOnNavigationItemSelectedListener(this)

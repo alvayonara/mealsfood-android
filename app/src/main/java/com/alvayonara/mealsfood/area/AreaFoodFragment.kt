@@ -57,7 +57,7 @@ class AreaFoodFragment : BaseFragment<FragmentAreaFoodBinding>(), IOnBackPressed
 
     override fun subscribeViewModel() {
         areaFoodViewModel.setSelectedFoodArea(food.strArea.orEmpty())
-        areaFoodViewModel.food.observe(viewLifecycleOwner, {
+        areaFoodViewModel.food.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.progressBarAreaFoods.visible()
@@ -68,7 +68,7 @@ class AreaFoodFragment : BaseFragment<FragmentAreaFoodBinding>(), IOnBackPressed
                     is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
-        })
+        }
     }
 
     override fun releaseData() {

@@ -57,7 +57,7 @@ class CategoryFoodFragment : BaseFragment<FragmentCategoryFoodBinding>(), IOnBac
 
     override fun subscribeViewModel() {
         categoryFoodViewModel.setSelectedFoodCategory(food.strCategory.orEmpty())
-        categoryFoodViewModel.food.observe(viewLifecycleOwner, {
+        categoryFoodViewModel.food.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.progressBarCategoryFoods.visible()
@@ -68,7 +68,7 @@ class CategoryFoodFragment : BaseFragment<FragmentCategoryFoodBinding>(), IOnBac
                     is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
-        })
+        }
     }
 
     override fun releaseData() {

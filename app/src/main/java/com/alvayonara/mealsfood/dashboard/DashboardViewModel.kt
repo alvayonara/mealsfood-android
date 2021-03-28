@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.alvayonara.mealsfood.core.base.BaseViewModel
 import com.alvayonara.mealsfood.core.domain.model.FoodCategory
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
 import com.alvayonara.mealsfood.core.utils.ConstFoodCategory.CATEGORY_BEEF
@@ -21,7 +22,7 @@ import com.alvayonara.mealsfood.core.utils.ConstFoodCategory.CATEGORY_STARTER
 import com.alvayonara.mealsfood.core.utils.ConstFoodCategory.CATEGORY_VEGAN
 import com.alvayonara.mealsfood.core.utils.ConstFoodCategory.CATEGORY_VEGETARIAN
 
-class DashboardViewModel(foodUseCase: FoodUseCase) : ViewModel() {
+class DashboardViewModel(foodUseCase: FoodUseCase) : BaseViewModel() {
 
     private val category = MutableLiveData<String>()
 
