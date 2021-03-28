@@ -260,7 +260,7 @@
                         app:fontFamily="@font/poppins" />
 
                     <com.ms.square.android.expandabletextview.ExpandableTextView
-                        android:id="@+id/_expandableTextView"
+                        android:id="@+id/expandableTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         expandableTextView:animAlphaStart="1"

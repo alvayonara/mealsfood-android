@@ -1,10 +1,11 @@
 package com.alvayonara.mealsfood.detail
 
 import androidx.lifecycle.*
+import com.alvayonara.mealsfood.core.base.BaseViewModel
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.domain.usecase.FoodUseCase
 
-class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
+class DetailFoodViewModel(private val foodUseCase: FoodUseCase) : BaseViewModel() {
 
     private val idMeal = MutableLiveData<String>()
 

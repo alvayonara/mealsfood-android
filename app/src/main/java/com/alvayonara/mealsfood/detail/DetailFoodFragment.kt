@@ -1,14 +1,12 @@
 package com.alvayonara.mealsfood.detail
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alvayonara.mealsfood.R
+import com.alvayonara.mealsfood.core.base.BaseFragment
 import com.alvayonara.mealsfood.core.data.source.Resource
 import com.alvayonara.mealsfood.core.domain.model.Food
 import com.alvayonara.mealsfood.core.ui.FoodIngredientsAdapter
@@ -17,51 +15,36 @@ import com.alvayonara.mealsfood.core.utils.GenerateIngredientList.getListIngredi
 import com.alvayonara.mealsfood.core.utils.Helper.setToast
 import com.alvayonara.mealsfood.databinding.FragmentDetailFoodBinding
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_detail_food.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailFoodFragment : Fragment(), IOnBackPressed {
+class DetailFoodFragment : BaseFragment<FragmentDetailFoodBinding>(), IOnBackPressed {
 
     private val detailFoodViewModel: DetailFoodViewModel by viewModel()
-
-    private var _binding: FragmentDetailFoodBinding? = null
-    private val binding get() = _binding!!
 
     private val args: DetailFoodFragmentArgs by navArgs()
     private lateinit var food: Food
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailFoodBinding.inflate(inflater, container, false)
-        return binding.root
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDetailFoodBinding
+        get() = FragmentDetailFoodBinding::inflate
+
+    override fun setup() {
+        setupView()
+        subscribeViewModel()
+        checkIsFoodFavorite()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (activity != null) {
-            initToolbar()
-            initView()
-            subscribeVm()
-            checkIsFoodFavorite()
-        }
-    }
-
-    private fun initToolbar() {
+    override fun setupView() {
         with(binding.toolbar) {
             setNavigationIcon(R.drawable.ic_back)
             setNavigationOnClickListener { navigateUp() }
         }
-    }
 
-    private fun initView() {
         args.food.let { food = it }
     }
 
-    private fun subscribeVm() {
+    override fun subscribeViewModel() {
         detailFoodViewModel.setSelectedIdMeal(food.idMeal.orEmpty())
-        detailFoodViewModel.foodDetail.observe(viewLifecycleOwner, {
+        detailFoodViewModel.foodDetail.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> binding.progressBarFoodDetail.visible()
@@ -75,7 +58,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                     is Resource.Error -> setToast("An Error Occurred", requireActivity())
                 }
             }
-        })
+        }
     }
 
     private fun populateDetail(food: List<Food>) {
@@ -101,7 +84,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
                 initListIngredients(foodDetail)
 
                 // Set instructions
-                _expandableTextView.text = foodDetail.strInstructions
+                expandableTextView.text = foodDetail.strInstructions
 
                 btnFoodCategory.setOnClickListener {
                     val nav =
@@ -171,9 +154,7 @@ class DetailFoodFragment : Fragment(), IOnBackPressed {
         return true
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun releaseData() {
         binding.rvFoodIngredients.adapter = null
-        _binding = null
     }
 }

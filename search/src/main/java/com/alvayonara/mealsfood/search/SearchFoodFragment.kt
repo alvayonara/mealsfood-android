@@ -1,15 +1,13 @@
 package com.alvayonara.mealsfood.search
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alvayonara.mealsfood.core.base.BaseFragment
 import com.alvayonara.mealsfood.core.data.source.remote.network.ApiResponse
 import com.alvayonara.mealsfood.core.domain.model.FoodRecentSearch
 import com.alvayonara.mealsfood.core.ui.FoodAdapter
@@ -21,43 +19,30 @@ import com.alvayonara.mealsfood.di.searchFoodModule
 import com.alvayonara.search.databinding.FragmentSearchFoodBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.view_search_food.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class SearchFoodFragment : Fragment(), IOnBackPressed {
+class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(), IOnBackPressed {
 
     private val searchFoodViewModel: SearchFoodViewModel by viewModel()
 
     private lateinit var foodAdapter: FoodAdapter
     private lateinit var foodRecentSearchAdapter: FoodRecentSearchAdapter
 
-    private var _binding: FragmentSearchFoodBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchFoodBinding
+        get() = FragmentSearchFoodBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchFoodBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setup() {
         loadKoinModules(searchFoodModule)
-        if (activity != null) {
-            initView()
-            initAdapter()
-            initRecyclerView()
-            initEditTextStream()
-            subscribeVm()
-        }
+        setupView()
+        setupRecyclerView()
+        setupEditTextStream()
+        subscribeViewModel()
     }
 
-    private fun initView() {
+    override fun setupView() {
         binding.edtSearchFood.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH
                 || actionId == EditorInfo.IME_ACTION_DONE
@@ -72,13 +57,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
         })
     }
 
-    private fun startSearch() {
-        binding.edtSearchFood.clearFocus()
-        val search = binding.edtSearchFood.text.toString()
-        if (search.isNotEmpty()) insertToRecentSearch(search)
-    }
-
-    private fun initAdapter() {
+    override fun setupRecyclerView() {
         foodAdapter = FoodAdapter(FoodAdapter.TYPE_LIST).apply {
             onItemClick = {
                 insertToRecentSearch(it.strMeal.orEmpty())
@@ -95,9 +74,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
                 insertToRecentSearch(it.strMeal)
             }
         }
-    }
 
-    private fun initRecyclerView() {
         with(binding.rvSearchFoods) {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -112,7 +89,7 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
     }
 
     @SuppressLint("CheckResult")
-    private fun initEditTextStream() {
+    private fun setupEditTextStream() {
         searchFoodViewModel.fromView(binding.edtSearchFood)
             .debounce(300, TimeUnit.MILLISECONDS)
             .filter { text -> text.isNotEmpty() }
@@ -125,12 +102,12 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
             }
     }
 
-    private fun subscribeVm() {
-        searchFoodViewModel.recentSearchFood.observe(viewLifecycleOwner, {
+    override fun subscribeViewModel() {
+        searchFoodViewModel.recentSearchFood.onLiveDataResult {
             foodRecentSearchAdapter.setRecentSearchFoods(it)
-        })
+        }
 
-        searchFoodViewModel.searchFood.observe(viewLifecycleOwner, {
+        searchFoodViewModel.searchFood.onLiveDataResult {
             if (it != null) {
                 when (it) {
                     is ApiResponse.Success -> {
@@ -148,16 +125,16 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
                     }
                 }
             }
-        })
+        }
 
-        searchFoodViewModel.loading.observe(viewLifecycleOwner, {
+        searchFoodViewModel.loading.onLiveDataResult {
             if (it)
                 binding.progressBarSearchFood.visible()
             else
                 binding.progressBarSearchFood.gone()
-        })
+        }
 
-        searchFoodViewModel.isEditTextEmpty.observe(viewLifecycleOwner, {
+        searchFoodViewModel.isEditTextEmpty.onLiveDataResult {
             binding.viewSearchFoodNotFound.root.gone()
             binding.rvSearchFoods.visible()
             foodAdapter.clearFoods()
@@ -166,7 +143,13 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
                 binding.viewSearchFoodLayout.root.visible()
             else
                 binding.viewSearchFoodLayout.root.gone()
-        })
+        }
+    }
+
+    private fun startSearch() {
+        binding.edtSearchFood.clearFocus()
+        val search = binding.edtSearchFood.text.toString()
+        if (search.isNotEmpty()) insertToRecentSearch(search)
     }
 
     private fun setEditText(search: String) {
@@ -181,11 +164,9 @@ class SearchFoodFragment : Fragment(), IOnBackPressed {
 
     override fun onBackPressed(): Boolean = false
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun releaseData() {
         hideKeyboard(requireActivity())
         binding.rvSearchFoods.adapter = null
         binding.viewSearchFoodLayout.rvRecentSearchFood.adapter = null
-        _binding = null
     }
 }
