@@ -9,10 +9,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationFragmentKtxVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationUiKtxVersion"
 
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$junitTestVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
@@ -42,4 +38,11 @@ dependencies {
 
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+
+    // Unit Testing
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
 }

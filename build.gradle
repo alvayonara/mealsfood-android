@@ -38,9 +38,10 @@ ext {
     navigationFragmentKtxVersion = '2.3.1'
     navigationUiKtxVersion = '2.3.1'
 
-    junitVersion = '4.13.1'
-    junitTestVersion = '1.1.2'
-    espressoVersion = '3.3.0'
+    junitVersion = '4.13.2'
+    mockitoVersion = '3.6.0'
+    mockitoKotlinVersion = '2.2.0'
+    coreTestingVersion = '2.1.0'
 
     materialVersion = '1.2.1'
     recyclerViewVersion = '1.1.0'
