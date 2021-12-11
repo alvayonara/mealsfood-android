@@ -39,8 +39,6 @@ There are 4 features on this apps:
 * [Shimmer](https://github.com/facebook/shimmer-android/) - loading indicator.
 * [Expandable TextView](https://github.com/Manabu-GT/ExpandableTextView/) - expand/collapse TextView.
 * [Leak Canary](https://github.com/square/leakcanary/) - memory leak detection.
-* [OWASP Certificate Pinning](https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning/) - prevent fake certificate and causing [Man-in-the-middle attack](https://owasp.org/www-community/attacks/Man-in-the-middle_attack/).
-* [SQLCipher](https://github.com/sqlcipher/android-database-sqlcipher/) - local database encryption.
 * [ProGuard](https://github.com/Guardsquare/proguard/) - prevent reverse engineering.
 * [Mockito](https://github.com/mockito/mockito/) - unit testing.
 
