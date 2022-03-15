@@ -27,7 +27,6 @@ There are 4 features on this apps:
 * [Modularization](https://https://developer.android.com/guide/app-bundle/play-feature-delivery/) - separating logical components of project into discrete modules.
 * [Dynamic Feature](https://medium.com/mindorks/dynamic-feature-modules-the-future-4bee124c0f1/) - separate certain features and resources from the base module and include them in app bundle.
 * [NetworkBoundResource](https://developer.android.com/jetpack/guide/) - offline first strategy.
-* [Koin](https://insert-koin.io/) - dependency injection.
 * [Retrofit2](https://github.com/square/retrofit/) - REST APIs.
 * [GSON](https://github.com/google/gson/) - JSON serialization.
 * [RxJava](https://github.com/ReactiveX/RxJava/) - reactive programming.
