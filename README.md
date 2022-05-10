@@ -67,7 +67,7 @@ Replace YOUR API KEY HERE with your API Key from TheMealDB.
 ## 📝 License
 
 ```
-Copyright 2021 Alva Yonara Puramandya
+Copyright 2022 Alva Yonara Puramandya
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
